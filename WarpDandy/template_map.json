@@ -2,7 +2,8 @@
 	"normal": {
 		"other": {
 			"FullartTrix": ["plugins.WarpDandy.templates", "FullartTrixTemplate"],
-			"Legends": ["plugins.WarpDandy.templates", "LegendsTemplate"]
+			"Legends": ["plugins.WarpDandy.templates", "LegendsTemplate"],
+			"Portal": ["plugins.WarpDandy.templates", "PortalTemplate"]
 		}
 	}
 }

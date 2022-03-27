@@ -53,3 +53,24 @@ class LegendsTemplate (temp.NormalClassicTemplate):
     def enable_frame_layers (self):
         # DO STUFF
         super().enable_frame_layers()
+ 
+ 
+class PortalTemplate (temp.NormalClassicTemplate):
+    """
+     * Created by WarpDandy
+    """
+    def template_file_name (self):
+        return "WarpDandy/Portal"
+    
+    def template_suffix (self):
+        return "Portal"
+    
+    # OPTIONAL
+    def __init__ (self, layout, file):
+        # DO STUFF
+        super().__init__(layout, file)
+    
+    # OPTIONAL
+    def enable_frame_layers (self):
+        # DO STUFF
+        super().enable_frame_layers()
