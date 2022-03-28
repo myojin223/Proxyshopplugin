@@ -74,3 +74,24 @@ class PortalTemplate (temp.NormalClassicTemplate):
     def enable_frame_layers (self):
         # DO STUFF
         super().enable_frame_layers()
+        
+
+class NinjaTemplate (temp.NormalTemplate):
+    """
+     * Created by WarpDandy
+    """
+    def template_file_name (self):
+        return "WarpDandy/Ninja"
+    
+    def template_suffix (self):
+        return "Ninja"
+    
+    # OPTIONAL
+    def __init__ (self, layout, file):
+        # DO STUFF
+        super().__init__(layout, file)
+    
+    # OPTIONAL
+    def enable_frame_layers (self):
+        # DO STUFF
+        super().enable_frame_layers()
