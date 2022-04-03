@@ -95,3 +95,45 @@ class NinjaTemplate (temp.NormalTemplate):
     def enable_frame_layers (self):
         # DO STUFF
         super().enable_frame_layers()
+ 
+ 
+class NinjaGlitchTemplate (temp.NormalTemplate):
+    """
+     * Created by WarpDandy
+    """
+    def template_file_name (self):
+        return "WarpDandy/NinjaGlitch"
+    
+    def template_suffix (self):
+        return "Glitch Ninja"
+    
+    # OPTIONAL
+    def __init__ (self, layout, file):
+        # DO STUFF
+        super().__init__(layout, file)
+    
+    # OPTIONAL
+    def enable_frame_layers (self):
+        # DO STUFF
+        super().enable_frame_layers()   
+
+
+class MirrorTemplate (temp.NormalTemplate):
+    """
+     * Created by WarpDandy
+    """
+    def template_file_name (self):
+        return "WarpDandy/Mirror"
+    
+    def template_suffix (self):
+        return "Left-Handed"
+    
+    # OPTIONAL
+    def __init__ (self, layout, file):
+        # DO STUFF
+        super().__init__(layout, file)
+    
+    # OPTIONAL
+    def enable_frame_layers (self):
+        # DO STUFF
+        super().enable_frame_layers()
