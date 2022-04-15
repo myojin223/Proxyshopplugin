@@ -1,0 +1,11 @@
+{
+	"normal": {
+		"FullartTrix": "FullartTrixTemplate",
+		"Legends": "LegendsTemplate",
+		"Portal": "PortalTemplate",
+		"Ninja": "NinjaTemplate",
+		"NinjaGlitch": "NinjaGlitchTemplate",
+		"Mirror": "MirrorTemplate",
+		"ClassicWhiteBorder": "ClassicWhiteBorderTemplate"
+	}
+}

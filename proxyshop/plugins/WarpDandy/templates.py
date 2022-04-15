@@ -137,3 +137,24 @@ class MirrorTemplate (temp.NormalTemplate):
     def enable_frame_layers (self):
         # DO STUFF
         super().enable_frame_layers()
+         
+ 
+class ClassicWhiteBorderTemplate (temp.NormalClassicTemplate):
+    """
+     * Created by WarpDandy
+    """
+    def template_file_name (self):
+        return "WarpDandy/ClassicWhiteBorder"
+    
+    def template_suffix (self):
+        return "Classic WB"
+    
+    # OPTIONAL
+    def __init__ (self, layout, file):
+        # DO STUFF
+        super().__init__(layout, file)
+    
+    # OPTIONAL
+    def enable_frame_layers (self):
+        # DO STUFF
+        super().enable_frame_layers()
