@@ -6,6 +6,10 @@
 		"Ninja": "NinjaTemplate",
 		"NinjaGlitch": "NinjaGlitchTemplate",
 		"Mirror": "MirrorTemplate",
-		"ClassicWhiteBorder": "ClassicWhiteBorderTemplate"
+		"ClassicWhiteBorder": "ClassicWhiteBorderTemplate",
+		"NicknameSmall": "NicknameSmallTemplate",
+		"NicknameMedium": "NicknameMediumTemplate",
+		"NicknameLarge": "NicknameLargeTemplate",
+		"GoldenAge": "GoldenAgeTemplate"
 	}
 }
