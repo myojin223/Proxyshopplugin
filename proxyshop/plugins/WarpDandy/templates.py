@@ -24,9 +24,9 @@ class FullartTrixTemplate (temp.NormalFullartTemplate):
         return "FullartTrix"
     
     # OPTIONAL
-    def __init__ (self, layout, file):
+    def __init__ (self, layout):
         # DO STUFF
-        super().__init__(layout, file)
+        super().__init__(layout)
     
     # OPTIONAL
     def enable_frame_layers (self):
@@ -45,9 +45,9 @@ class LegendsTemplate (temp.NormalClassicTemplate):
         return "Legends"
     
     # OPTIONAL
-    def __init__ (self, layout, file):
+    def __init__ (self, layout):
         # DO STUFF
-        super().__init__(layout, file)
+        super().__init__(layout)
     
     # OPTIONAL
     def enable_frame_layers (self):
@@ -55,21 +55,20 @@ class LegendsTemplate (temp.NormalClassicTemplate):
         super().enable_frame_layers()
  
  
-class PortalTemplate (temp.NormalClassicTemplate):
+class SamuraiTemplate (temp.NormalTemplate):
     """
      * Created by WarpDandy
-     * Not currently working
     """
     def template_file_name (self):
-        return "WarpDandy/Portal"
+        return "WarpDandy/Samurai"
     
     def template_suffix (self):
-        return "Portal"
+        return "Samurai"
     
     # OPTIONAL
-    def __init__ (self, layout, file):
+    def __init__ (self, layout):
         # DO STUFF
-        super().__init__(layout, file)
+        super().__init__(layout)
     
     # OPTIONAL
     def enable_frame_layers (self):
@@ -88,9 +87,9 @@ class NinjaTemplate (temp.NormalTemplate):
         return "Ninja"
     
     # OPTIONAL
-    def __init__ (self, layout, file):
+    def __init__ (self, layout):
         # DO STUFF
-        super().__init__(layout, file)
+        super().__init__(layout)
     
     # OPTIONAL
     def enable_frame_layers (self):
@@ -109,9 +108,9 @@ class NinjaGlitchTemplate (temp.NormalTemplate):
         return "Glitch Ninja"
     
     # OPTIONAL
-    def __init__ (self, layout, file):
+    def __init__ (self, layout):
         # DO STUFF
-        super().__init__(layout, file)
+        super().__init__(layout)
     
     # OPTIONAL
     def enable_frame_layers (self):
@@ -130,9 +129,9 @@ class MirrorTemplate (temp.NormalTemplate):
         return "Left-Handed"
     
     # OPTIONAL
-    def __init__ (self, layout, file):
+    def __init__ (self, layout):
         # DO STUFF
-        super().__init__(layout, file)
+        super().__init__(layout)
     
     # OPTIONAL
     def enable_frame_layers (self):
@@ -151,9 +150,9 @@ class ClassicWhiteBorderTemplate (temp.NormalClassicTemplate):
         return "Classic WB"
     
     # OPTIONAL
-    def __init__ (self, layout, file):
+    def __init__ (self, layout):
         # DO STUFF
-        super().__init__(layout, file)
+        super().__init__(layout)
     
     # OPTIONAL
     def enable_frame_layers (self):
@@ -162,9 +161,7 @@ class ClassicWhiteBorderTemplate (temp.NormalClassicTemplate):
  
 class NicknameSmallTemplate (temp.NormalTemplate):
     """
-     * The showcase template first used on the Women's Day Secret Lair. The layer structure of this template and NormalTemplate are
-     * similar, but this template doesn't have any background layers, and a layer mask on the pinlines group needs to be enabled when
-     * the card is legendary.
+     * Requires manually adding the nickname
     """
     def template_file_name (self):
         return "WarpDandy/NicknameSmall"
@@ -172,9 +169,9 @@ class NicknameSmallTemplate (temp.NormalTemplate):
     def template_suffix (self):
         return "Ikoria S"
 
-    def __init__ (self, layout, file):
+    def __init__ (self, layout):
         # strip out reminder text for fullart
-        super().__init__(layout, file)
+        super().__init__(layout)
 
     def enable_frame_layers (self):
 
@@ -199,9 +196,7 @@ class NicknameSmallTemplate (temp.NormalTemplate):
 
 class NicknameMediumTemplate (temp.NormalTemplate):
     """
-     * The showcase template first used on the Women's Day Secret Lair. The layer structure of this template and NormalTemplate are
-     * similar, but this template doesn't have any background layers, and a layer mask on the pinlines group needs to be enabled when
-     * the card is legendary.
+     * Requires manually adding the nickname
     """
     def template_file_name (self):
         return "WarpDandy/NicknameMedium"
@@ -209,9 +204,9 @@ class NicknameMediumTemplate (temp.NormalTemplate):
     def template_suffix (self):
         return "Ikoria M"
 
-    def __init__ (self, layout, file):
+    def __init__ (self, layout):
         # strip out reminder text for fullart
-        super().__init__(layout, file)
+        super().__init__(layout)
 
     def enable_frame_layers (self):
 
@@ -235,9 +230,7 @@ class NicknameMediumTemplate (temp.NormalTemplate):
    
 class NicknameLargeTemplate (temp.NormalTemplate):
     """
-     * The showcase template first used on the Women's Day Secret Lair. The layer structure of this template and NormalTemplate are
-     * similar, but this template doesn't have any background layers, and a layer mask on the pinlines group needs to be enabled when
-     * the card is legendary.
+     * Requires manually adding the nickname
     """
     def template_file_name (self):
         return "WarpDandy/NicknameLarge"
@@ -245,9 +238,9 @@ class NicknameLargeTemplate (temp.NormalTemplate):
     def template_suffix (self):
         return "Ikoria L"
 
-    def __init__ (self, layout, file):
+    def __init__ (self, layout):
         # strip out reminder text for fullart
-        super().__init__(layout, file)
+        super().__init__(layout)
 
     def enable_frame_layers (self):
 
@@ -279,9 +272,9 @@ class GoldenAgeTemplate (temp.NormalFullartTemplate):
         return "Golden Age"
     
     # OPTIONAL
-    def __init__ (self, layout, file):
+    def __init__ (self, layout):
         # DO STUFF
-        super().__init__(layout, file)
+        super().__init__(layout)
     
     # OPTIONAL
     def enable_frame_layers (self):
