@@ -4,12 +4,13 @@
 		"Legends": "LegendsTemplate",
 		"Samurai": "SamuraiTemplate",
 		"Ninja": "NinjaTemplate",
-		"NinjaGlitch": "NinjaGlitchTemplate",
+		"Ninja Glitch": "NinjaGlitchTemplate",
 		"Mirror": "MirrorTemplate",
-		"ClassicWhiteBorder": "ClassicWhiteBorderTemplate",
-		"NicknameSmall": "NicknameSmallTemplate",
-		"NicknameMedium": "NicknameMediumTemplate",
-		"NicknameLarge": "NicknameLargeTemplate",
-		"GoldenAge": "GoldenAgeTemplate"
+		"Classic White Border": "ClassicWhiteBorderTemplate",
+		"Nickname Small": "NicknameSmallTemplate",
+		"Nickname Medium": "NicknameMediumTemplate",
+		"Nickname Large": "NicknameLargeTemplate",
+		"Golden Age": "GoldenAgeTemplate",
+		"Golden Age 2": "GoldenAge2Template"
 	}
 }
