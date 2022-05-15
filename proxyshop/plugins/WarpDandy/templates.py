@@ -320,3 +320,43 @@ class zneExpeditionTemplate (temp.NormalTemplate):
     def enable_frame_layers (self):
         # DO STUFF
         super().enable_frame_layers()
+        
+class SkyscraperTemplate (temp.NormalTemplate):
+    """
+     * Created by WarpDandy
+    """
+    def template_file_name (self):
+        return "WarpDandy/Skyscraper"
+    
+    def template_suffix (self):
+        return "Skyscraper"
+    
+    # OPTIONAL
+    def __init__ (self, layout):
+        # DO STUFF
+        super().__init__(layout)
+    
+    # OPTIONAL
+    def enable_frame_layers (self):
+        # DO STUFF
+        super().enable_frame_layers()
+        
+class GoldenAgeV2Template (temp.NormalTemplate):
+    """
+     * Created by MrOppsokopolis
+    """
+    def template_file_name (self):
+        return "WarpDandy/GoldenAgeV2"
+    
+    def template_suffix (self):
+        return "Golden Age V2"
+    
+    # OPTIONAL
+    def __init__ (self, layout):
+        # DO STUFF
+        super().__init__(layout)
+    
+    # OPTIONAL
+    def enable_frame_layers (self):
+        # DO STUFF
+        super().enable_frame_layers()
