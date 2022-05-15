@@ -281,7 +281,7 @@ class GoldenAgeTemplate (temp.NormalFullartTemplate):
         # DO STUFF
         super().enable_frame_layers()
        
-class GoldenAge2Template (temp.NormalFullartTemplate):
+class GoldenAge2Template (temp.NormalTemplate):
     """
      * Created by WarpDandy
     """
@@ -290,6 +290,26 @@ class GoldenAge2Template (temp.NormalFullartTemplate):
     
     def template_suffix (self):
         return "Golden Age 2"
+    
+    # OPTIONAL
+    def __init__ (self, layout):
+        # DO STUFF
+        super().__init__(layout)
+    
+    # OPTIONAL
+    def enable_frame_layers (self):
+        # DO STUFF
+        super().enable_frame_layers()
+        
+class zneExpeditionTemplate (temp.NormalTemplate):
+    """
+     * Created by WarpDandy
+    """
+    def template_file_name (self):
+        return "WarpDandy/zneExpedition"
+    
+    def template_suffix (self):
+        return "Original Expedition"
     
     # OPTIONAL
     def __init__ (self, layout):
