@@ -360,3 +360,43 @@ class GoldenAgeV2Template (temp.NormalTemplate):
     def enable_frame_layers (self):
         # DO STUFF
         super().enable_frame_layers()
+        
+class ArtDecoTemplate (temp.NormalTemplate):
+    """
+     * Created by MrOppsokopolis
+    """
+    def template_file_name (self):
+        return "WarpDandy/ArtDeco"
+    
+    def template_suffix (self):
+        return "Art Deco"
+    
+    # OPTIONAL
+    def __init__ (self, layout):
+        # DO STUFF
+        super().__init__(layout)
+    
+    # OPTIONAL
+    def enable_frame_layers (self):
+        # DO STUFF
+        super().enable_frame_layers()
+        
+class UniversesBeyondTemplate (temp.NormalTemplate):
+    """
+     * Created by MrOppsokopolis
+    """
+    def template_file_name (self):
+        return "WarpDandy/UniversesBeyond"
+    
+    def template_suffix (self):
+        return "Universes Beyond"
+    
+    # OPTIONAL
+    def __init__ (self, layout):
+        # DO STUFF
+        super().__init__(layout)
+    
+    # OPTIONAL
+    def enable_frame_layers (self):
+        # DO STUFF
+        super().enable_frame_layers()
