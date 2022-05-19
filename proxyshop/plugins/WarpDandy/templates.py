@@ -400,3 +400,198 @@ class UniversesBeyondTemplate (temp.NormalTemplate):
     def enable_frame_layers (self):
         # DO STUFF
         super().enable_frame_layers()
+        
+"""
+Planeswalker templates
+"""
+class ClassicPWTemplate (temp.PlaneswalkerTemplate):
+    """
+     * Planeswalker template - 3 or 4 loyalty abilities.
+    """
+    def template_file_name (self):
+        return "WarpDandy/ClassicPW"
+
+    def __init__ (self, layout):
+        self.exit_early = True
+        super().__init__(layout)
+
+        if self.layout.is_colorless: self.art_reference = psd.getLayer(con.layers['FULL_ART_FRAME'])
+        else: self.art_reference = psd.getLayer(con.layers['PLANESWALKER_ART_FRAME'])
+
+        ability_array = self.layout.oracle_text.split("\n")
+        num_abilities = 3
+        if len(ability_array) > 3: num_abilities = 4
+
+        # docref for everything but legal and art reference is based on number of abilities
+        self.docref = psd.getLayerSet("pw-"+str(num_abilities))
+        self.docref.visible = True
+
+        # Basic text layers
+        self.basic_text_layers(psd.getLayerSet(con.layers['TEXT_AND_ICONS'], self.docref))
+
+        # planeswalker ability layers
+        group_names = [con.layers['FIRST_ABILITY'], con.layers['SECOND_ABILITY'], con.layers['THIRD_ABILITY'], con.layers['FOURTH_ABILITY']]
+        loyalty_group = psd.getLayerSet(con.layers['LOYALTY_GRAPHICS'], self.docref)
+
+        for i, ability in enumerate(ability_array):
+            if i == 4: break
+            ability_group = psd.getLayerSet(group_names[i], loyalty_group)
+            static_text_layer = psd.getLayer(con.layers['STATIC_TEXT'], ability_group)
+            ability_text_layer = psd.getLayer(con.layers['ABILITY_TEXT'], ability_group)
+            ability_layer = ability_text_layer
+            colon_index = ability.find(": ")
+
+            # determine if this is a static or activated ability by the presence of ":" in the start of the ability
+            if colon_index > 0 < 5:
+                # activated ability
+
+                # determine which loyalty group to enable, and set the loyalty symbol's text
+                loyalty_graphic = psd.getLayerSet(ability[0], ability_group)
+                loyalty_graphic.visible = True
+                self.tx_layers.append(
+                    txt_layers.TextField(
+                        layer = psd.getLayer(con.layers['COST'], loyalty_graphic),
+                        text_contents = ability[0:int(colon_index)],
+                        text_color = psd.rgb_black(),
+                    )
+                )
+                ability = ability[int(colon_index)+2:]
+
+            else:
+                # static ability
+                ability_layer = static_text_layer
+                ability_text_layer.visible = False
+                static_text_layer.visible = True
+                psd.getLayer("Colon", ability_group).visible = False
+
+            self.tx_layers.append(
+                txt_layers.BasicFormattedTextField(
+                    layer = ability_layer,
+                    text_contents = ability,
+                    text_color = psd.get_text_layer_color(ability_layer),
+                )
+            )
+
+        # starting loyalty
+        self.tx_layers.append(
+            txt_layers.TextField(
+                layer = psd.getLayer(con.layers['TEXT'], psd.getLayerSet(con.layers['STARTING_LOYALTY'], loyalty_group)),
+                text_contents = self.layout.scryfall['loyalty'],
+                text_color = psd.rgb_white(),
+            )
+        )
+
+        # paste scryfall scan
+        app.activeDocument.activeLayer = psd.getLayerSet(con.layers['TEXTBOX'], self.docref)
+        self.paste_scryfall_scan(psd.getLayer(con.layers['SCRYFALL_SCAN_FRAME']))
+
+    def enable_frame_layers (self):
+        # Twins, pinlines, background
+        psd.getLayer(self.layout.twins, psd.getLayerSet(con.layers['TWINS'], self.docref)).visible = True
+        psd.getLayer(self.layout.pinlines, psd.getLayerSet(con.layers['PINLINES'], self.docref)).visible = True
+        self.enable_background()
+
+    def enable_background (self):
+        """
+        Enable card background
+        """
+        psd.getLayer(self.layout.background, psd.getLayerSet(con.layers['BACKGROUND'], self.docref)).visible = True
+        
+    def template_suffix (self):
+        return "Classic PW"
+        
+class ArtDecoPWTemplate (temp.PlaneswalkerTemplate):
+    """
+     * Planeswalker template - 3 or 4 loyalty abilities.
+    """
+    def template_file_name (self):
+        return "WarpDandy/ArtDecoPW"
+
+    def __init__ (self, layout):
+        self.exit_early = True
+        super().__init__(layout)
+
+        if self.layout.is_colorless: self.art_reference = psd.getLayer(con.layers['FULL_ART_FRAME'])
+        else: self.art_reference = psd.getLayer(con.layers['PLANESWALKER_ART_FRAME'])
+
+        ability_array = self.layout.oracle_text.split("\n")
+        num_abilities = 3
+        if len(ability_array) > 3: num_abilities = 4
+
+        # docref for everything but legal and art reference is based on number of abilities
+        self.docref = psd.getLayerSet("pw-"+str(num_abilities))
+        self.docref.visible = True
+
+        # Basic text layers
+        self.basic_text_layers(psd.getLayerSet(con.layers['TEXT_AND_ICONS'], self.docref))
+
+        # planeswalker ability layers
+        group_names = [con.layers['FIRST_ABILITY'], con.layers['SECOND_ABILITY'], con.layers['THIRD_ABILITY'], con.layers['FOURTH_ABILITY']]
+        loyalty_group = psd.getLayerSet(con.layers['LOYALTY_GRAPHICS'], self.docref)
+
+        for i, ability in enumerate(ability_array):
+            if i == 4: break
+            ability_group = psd.getLayerSet(group_names[i], loyalty_group)
+            static_text_layer = psd.getLayer(con.layers['STATIC_TEXT'], ability_group)
+            ability_text_layer = psd.getLayer(con.layers['ABILITY_TEXT'], ability_group)
+            ability_layer = ability_text_layer
+            colon_index = ability.find(": ")
+
+            # determine if this is a static or activated ability by the presence of ":" in the start of the ability
+            if colon_index > 0 < 5:
+                # activated ability
+
+                # determine which loyalty group to enable, and set the loyalty symbol's text
+                loyalty_graphic = psd.getLayerSet(ability[0], ability_group)
+                loyalty_graphic.visible = True
+                self.tx_layers.append(
+                    txt_layers.TextField(
+                        layer = psd.getLayer(con.layers['COST'], loyalty_graphic),
+                        text_contents = ability[0:int(colon_index)],
+                        text_color = psd.rgb_white(),
+                    )
+                )
+                ability = ability[int(colon_index)+2:]
+
+            else:
+                # static ability
+                ability_layer = static_text_layer
+                ability_text_layer.visible = False
+                static_text_layer.visible = True
+                psd.getLayer("Colon", ability_group).visible = False
+
+            self.tx_layers.append(
+                txt_layers.BasicFormattedTextField(
+                    layer = ability_layer,
+                    text_contents = ability,
+                    text_color = psd.get_text_layer_color(ability_layer),
+                )
+            )
+
+        # starting loyalty
+        self.tx_layers.append(
+            txt_layers.TextField(
+                layer = psd.getLayer(con.layers['TEXT'], psd.getLayerSet(con.layers['STARTING_LOYALTY'], loyalty_group)),
+                text_contents = self.layout.scryfall['loyalty'],
+                text_color = psd.rgb_white(),
+            )
+        )
+
+        # paste scryfall scan
+        app.activeDocument.activeLayer = psd.getLayerSet(con.layers['TEXTBOX'], self.docref)
+        self.paste_scryfall_scan(psd.getLayer(con.layers['SCRYFALL_SCAN_FRAME']))
+
+    def enable_frame_layers (self):
+        # Twins, pinlines, background
+        psd.getLayer(self.layout.twins, psd.getLayerSet(con.layers['TWINS'], self.docref)).visible = True
+        psd.getLayer(self.layout.pinlines, psd.getLayerSet(con.layers['PINLINES'], self.docref)).visible = True
+        self.enable_background()
+
+    def enable_background (self):
+        """
+        Enable card background
+        """
+        psd.getLayer(self.layout.background, psd.getLayerSet(con.layers['BACKGROUND'], self.docref)).visible = True
+        
+    def template_suffix (self):
+        return "Art Deco PW"

@@ -17,5 +17,10 @@
 		"Golden Age V2": "GoldenAgeV2Template",
 		"Art Deco": "ArtDecoTemplate",
 		"Universes Beyond": "UniversesBeyondTemplate"
+	},
+	"planeswalker": {
+		"Classic PW": "ClassicPWTemplate",
+		"Art Deco PW": "ArtDecoPWTemplate"
+	
 	}
 }
