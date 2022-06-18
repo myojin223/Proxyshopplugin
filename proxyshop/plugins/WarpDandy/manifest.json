@@ -1,0 +1,86 @@
+{
+	"Normal": {
+		"FullartTrix": {
+			"file": "FullartTrix.psd",
+			"id": "1ReGJeZucjwbPjsXmqAEP3zB_clHDO6-l"
+		},
+		"Legends": {
+			"file": "Legends.psd",
+			"id": "1sIL6y_y8fql4Qcw7Wu083DeGinEcfCi3"
+		},
+		"Samurai": {
+			"file": "Samurai.psd",
+			"id": "1L63KAFo4-R3Pj8WfBiQ6Dho5J-aJtrp2"
+		},
+		"Ninja": {
+			"file": "Ninja.psd",
+			"id": "1GxLkUQm2f5Acd85jIS10A7J4pqYSSPOK"
+		},
+		"Ninja Glitch": {
+			"file": "NinjaGlitch.psd",
+			"id": "1xEXBYkwa2JGRn9Zwm18T7smuhMi3DFXV"
+		},
+		"Mirror": {
+			"file": "Mirror.psd",
+			"id": "1lVqMF3weDuZ_QIHtyjT5One21wliZXNG"
+		},
+		"Classic White Border": {
+			"file": "ClassicWhiteBorder.psd",
+			"id": "1-xPnJvictQetv48F9tNntHol3B6EUaYV"
+		},
+		"Nickname Small": {
+			"file": "NicknameSmall.psd",
+			"id": "1EpRI370UB7nfceDfQ3mY1Dwm0Y1dbTTn"
+		},
+		"Nickname Medium": {
+			"file": "NicknameMedium.psd",
+			"id": "1Z2Eg_38BxzNO8Ub4yt_ilN7SwSTKYNL6"
+		},
+		"Nickname Large": {
+			"file": "NicknameLarge.psd",
+			"id": "1JEx0KocLv42rU4TXQgWQJcInzYg_5c9h"
+		},
+		"Golden Age": {
+			"file": "GoldenAge.psd",
+			"id": "1QBIwhtSDUnldFzixby7dGyDdoRzrwdpE"
+		},
+		"Golden Age 2": {
+			"file": "GoldenAge2.psd",
+			"id": "1iwUKo3jYY0v7sYjNjDJ9AZQbsLau_rRy"
+		},
+		"Original Expedition": {
+			"file": "zneExpedition.psd",
+			"id": "1JyjFRYgvEFnJ7_gVTX9YUsE9BYrgPeXb"
+		},
+		"Skyscraper": {
+			"file": "Skyscraper.psd",
+			"id": "1f9rTbXoeNNYGUiNMTY64ZxhbrV0kfPSS"
+		},
+		"Golden Age V2": {
+			"file": "GoldenAgeV2.psd",
+			"id": "1UTV-hMDqpXaSmq6WObjW_Fkg6IY5Srjv"
+		},
+		"Art Deco": {
+			"file": "ArtDeco.psd",
+			"id": "1MSnqGrvbeevUSpaI9-Xy1l3fuh_Rf4oA"
+		},
+		"Universes Beyond": {
+			"file": "UniversesBeyond.psd",
+			"id": "1e7zS0rsud_pBKEF-Hi5fq2_u3YuIMrZv"
+		},
+		"Classic Borderless Short": {
+			"file": "ClassicBorderlessShort.psd",
+			"id": ""
+		}
+	},
+	"Planeswalker": {
+		"Classic PW": {
+			"file": "ClassicPW.psd",
+			"id": "1w2qpg-YR8Rd_qwswQ0WILSGaLlvCTdhe"
+		},
+		"Art Deco PW": {
+			"file": "ArtDecoPW.psd",
+			"id": "1UerUkwOZJBitvHgZFG9CgoUUnQA4H28-"
+		}
+	}
+}
