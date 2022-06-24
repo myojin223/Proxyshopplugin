@@ -363,7 +363,7 @@ class GoldenAgeV2Template (temp.NormalTemplate):
         
 class ArtDecoTemplate (temp.NormalTemplate):
     """
-     * Created by MrOppsokopolis
+     * Created by WarpDandy
     """
     def template_file_name (self):
         return "WarpDandy/ArtDeco"
@@ -383,7 +383,7 @@ class ArtDecoTemplate (temp.NormalTemplate):
         
 class UniversesBeyondTemplate (temp.NormalTemplate):
     """
-     * Created by MrOppsokopolis
+     * Created by WarpDandy
     """
     def template_file_name (self):
         return "WarpDandy/UniversesBeyond"
@@ -400,6 +400,106 @@ class UniversesBeyondTemplate (temp.NormalTemplate):
     def enable_frame_layers (self):
         # DO STUFF
         super().enable_frame_layers()
+        
+class ClassicBorderlessShortTemplate (temp.NormalTemplate):
+    """
+     * Created by WarpDandy
+    """
+    def template_file_name (self):
+        return "WarpDandy/ClassicBorderlessShort"
+    
+    def template_suffix (self):
+        return "Classic Borderless Short"
+    
+    # OPTIONAL
+    def __init__(self, layout):
+        # strip out reminder text for extended cards
+        cfg.remove_reminder = True
+        super().__init__(layout)
+
+    def enable_frame_layers(self):
+
+        # Easy reference
+        docref = app.activeDocument
+
+        # twins and pt box
+        psd.getLayer(self.layout.twins, con.layers['TWINS']).visible = True
+        if self.is_creature: psd.getLayer(self.layout.twins, con.layers['PT_BOX']).visible = True
+
+        # pinlines
+        pinlines = psd.getLayerSet(con.layers['PINLINES_TEXTBOX'])
+        if self.is_land: pinlines = psd.getLayerSet(con.layers['LAND_PINLINES_TEXTBOX'])
+        psd.getLayer(self.layout.pinlines, pinlines).visible = True
+
+        # background
+        background = psd.getLayerSet(con.layers['BACKGROUND'])
+        if self.layout.is_nyx: background = psd.getLayerSet(con.layers['NYX'])
+        psd.getLayer(self.layout.background, background).visible = True
+
+        if self.is_legendary:
+            # legendary crown
+            crown = psd.getLayerSet(con.layers['LEGENDARY_CROWN'])
+            psd.getLayer(self.layout.pinlines, crown).visible = True
+            psd.getLayer(con.layers['NORMAL_BORDER'], con.layers['BORDER']).visible = False
+            psd.getLayer(con.layers['LEGENDARY_BORDER'], con.layers['BORDER']).visible = True
+
+            # Mask the top border sides
+            docref.activeLayer = background
+            psd.enable_active_layer_mask()
+
+            # enable companion texture
+            if self.is_companion: psd.getLayer(self.layout.pinlines, con.layers['COMPANION']).visible = True
+
+            # Hollow crown
+            if self.layout.is_nyx or self.is_companion:
+                # Enable the hollow crown shadow and layer mask on crown, pinlines, and shadows
+                super().enable_hollow_crown(crown, pinlines)
+                docref.activeLayer = psd.getLayer("Shadows Light", "Shadows")
+                psd.enable_active_layer_mask()
+
+        # Content aware fill
+        docref.activeLayer = self.art_layer
+        psd.content_fill_empty_area()
+        
+class EighthTemplate (temp.NormalTemplate):
+    """
+     * Created by WarpDandy
+    """
+    def template_file_name (self):
+        return "WarpDandy/Eighth"
+    
+    def template_suffix (self):
+        return "Eighth"
+    
+    # OPTIONAL
+    def __init__ (self, layout):
+        # DO STUFF
+        super().__init__(layout)
+    
+    # OPTIONAL
+    def enable_frame_layers (self):
+        # DO STUFF
+        super().enable_frame_layers()
+         
+class EtchedTemplate (temp.NormalTemplate):
+    """
+     * Created by WarpDandy
+    """
+    def template_file_name (self):
+        return "WarpDandy/Etched"
+    
+    def template_suffix (self):
+        return "Etched"
+    
+    # OPTIONAL
+    def __init__ (self, layout):
+        # DO STUFF
+        super().__init__(layout)
+    
+    # OPTIONAL
+    def enable_frame_layers (self):
+        # DO STUFF
+        super().enable_frame_layers() 
         
 """
 Planeswalker templates

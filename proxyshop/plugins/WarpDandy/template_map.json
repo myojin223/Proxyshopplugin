@@ -16,7 +16,11 @@
 		"Skyscraper": "SkyscraperTemplate",
 		"Golden Age V2": "GoldenAgeV2Template",
 		"Art Deco": "ArtDecoTemplate",
-		"Universes Beyond": "UniversesBeyondTemplate"
+		"Universes Beyond": "UniversesBeyondTemplate",
+		"Classic Borderless Short": "ClassicBorderlessShortTemplate",
+		"Eighth": "EighthTemplate",
+		"Etched": "EtchedTemplate"
+		
 	},
 	"planeswalker": {
 		"Classic PW": "ClassicPWTemplate",
