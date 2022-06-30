@@ -501,6 +501,26 @@ class EtchedTemplate (temp.NormalTemplate):
         # DO STUFF
         super().enable_frame_layers() 
         
+class DestinyTemplate (temp.NormalTemplate):
+    """
+     * Created by Meeple, ported to Proxyshop by WarpDandy
+    """
+    def template_file_name (self):
+        return "WarpDandy/Destiny"
+    
+    def template_suffix (self):
+        return "Destiny"
+    
+    # OPTIONAL
+    def __init__ (self, layout):
+        # DO STUFF
+        super().__init__(layout)
+    
+    # OPTIONAL
+    def enable_frame_layers (self):
+        # DO STUFF
+        super().enable_frame_layers()
+        
 """
 Planeswalker templates
 """
