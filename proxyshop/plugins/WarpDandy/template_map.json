@@ -20,7 +20,9 @@
 		"Classic Borderless Short": "ClassicBorderlessShortTemplate",
 		"Eighth": "EighthTemplate",
 		"Etched": "EtchedTemplate",
-		"Destiny": "DestinyTemplate"
+		"Destiny": "DestinyTemplate",
+		"Pinlines Extended Neon": "PinlinesExtNeonTemplate",
+		"Mystical Archive": "MysticalArchiveTemplate"
 		
 	},
 	"planeswalker": {
