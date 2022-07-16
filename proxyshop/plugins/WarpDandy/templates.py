@@ -12,7 +12,7 @@ import proxyshop.helpers as psd
 import photoshop.api as ps
 app = ps.Application()
 
-class FullartTrixTemplate (temp.NormalFullartTemplate):
+class FullartTrixTemplate (temp.NormalTemplate):
     """
      * Port of TrixAreForScoot Proximity Template
      * Created by WarpDandy & TrixAreForScoot
@@ -416,6 +416,8 @@ class ClassicBorderlessShortTemplate (temp.NormalTemplate):
         # strip out reminder text for extended cards
         cfg.remove_reminder = True
         super().__init__(layout)
+        # art
+        self.art_reference = psd.getLayer(con.layers['ART_FRAME'])
 
     def enable_frame_layers(self):
 
@@ -574,7 +576,9 @@ class MysticalArchiveTemplate (temp.NormalTemplate):
     def __init__ (self, layout):
         # DO STUFF
         super().__init__(layout)
-    
+        # full art
+        self.art_reference = psd.getLayer(con.layers['FULL_ART_FRAME']) 
+        
     # OPTIONAL
     def enable_frame_layers(self):
 
