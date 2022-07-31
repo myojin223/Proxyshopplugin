@@ -21,8 +21,10 @@
 		"Eighth": "EighthTemplate",
 		"Etched": "EtchedTemplate",
 		"Destiny": "DestinyTemplate",
-		"Pinlines Extended Neon": "PinlinesExtNeonTemplate",
-		"Mystical Archive": "MysticalArchiveTemplate"
+		"Neon Extended": "PinlinesExtNeonTemplate",
+		"Mystical Archive": "MysticalArchiveTemplate",
+		"Crimson Fang Extended": "FangExtendedTemplate",
+		"Golden Age Full Art": "GoldenAgeFullArtTemplate"
 		
 	},
 	"planeswalker": {

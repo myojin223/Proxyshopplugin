@@ -167,30 +167,38 @@ class NicknameSmallTemplate (temp.NormalTemplate):
         return "WarpDandy/NicknameSmall"
 
     def template_suffix (self):
-        return "Ikoria S"
+        return "Nickname S"
 
+    # OPTIONAL
     def __init__ (self, layout):
-        # strip out reminder text for fullart
+        # DO STUFF
         super().__init__(layout)
+        # full art
+        self.art_reference = psd.getLayer(con.layers['ART_FRAME']) 
+        
+    # OPTIONAL
+    def enable_frame_layers(self):
 
-    def enable_frame_layers (self):
+        # Easy reference
+        docref = app.activeDocument
 
         # twins and pt box
         psd.getLayer(self.layout.twins, con.layers['TWINS']).visible = True
-        if self.is_creature:
-            psd.getLayer(self.layout.twins, con.layers['PT_BOX']).visible = True
+        if self.is_creature: psd.getLayer(self.layout.twins, con.layers['PT_BOX']).visible = True
 
         # pinlines
         pinlines = psd.getLayerSet(con.layers['PINLINES_TEXTBOX'])
-        if self.is_land:
-            pinlines = psd.getLayerSet(con.layers['LAND_PINLINES_TEXTBOX'])
+        if self.is_land: pinlines = psd.getLayerSet(con.layers['LAND_PINLINES_TEXTBOX'])
         psd.getLayer(self.layout.pinlines, pinlines).visible = True
 
-        if self.is_legendary:
-            # legendary crown
-            psd.getLayer(self.layout.pinlines, con.layers['LEGENDARY_CROWN']).visible = True
-            app.activeDocument.activeLayer = pinlines
-            psd.enable_active_layer_mask()
+        # background
+        background = psd.getLayerSet(con.layers['BACKGROUND'])
+        if self.layout.is_nyx: background = psd.getLayerSet(con.layers['NYX'])
+        psd.getLayer(self.layout.background, background).visible = True
+
+        # Content aware fill
+        docref.activeLayer = self.art_layer
+        psd.content_fill_empty_area()
            
 
 
@@ -202,30 +210,38 @@ class NicknameMediumTemplate (temp.NormalTemplate):
         return "WarpDandy/NicknameMedium"
 
     def template_suffix (self):
-        return "Ikoria M"
+        return "Nickname M"
 
+    # OPTIONAL
     def __init__ (self, layout):
-        # strip out reminder text for fullart
+        # DO STUFF
         super().__init__(layout)
+        # full art
+        self.art_reference = psd.getLayer(con.layers['ART_FRAME']) 
+        
+    # OPTIONAL
+    def enable_frame_layers(self):
 
-    def enable_frame_layers (self):
+        # Easy reference
+        docref = app.activeDocument
 
         # twins and pt box
         psd.getLayer(self.layout.twins, con.layers['TWINS']).visible = True
-        if self.is_creature:
-            psd.getLayer(self.layout.twins, con.layers['PT_BOX']).visible = True
+        if self.is_creature: psd.getLayer(self.layout.twins, con.layers['PT_BOX']).visible = True
 
         # pinlines
         pinlines = psd.getLayerSet(con.layers['PINLINES_TEXTBOX'])
-        if self.is_land:
-            pinlines = psd.getLayerSet(con.layers['LAND_PINLINES_TEXTBOX'])
+        if self.is_land: pinlines = psd.getLayerSet(con.layers['LAND_PINLINES_TEXTBOX'])
         psd.getLayer(self.layout.pinlines, pinlines).visible = True
 
-        if self.is_legendary:
-            # legendary crown
-            psd.getLayer(self.layout.pinlines, con.layers['LEGENDARY_CROWN']).visible = True
-            app.activeDocument.activeLayer = pinlines
-            psd.enable_active_layer_mask()
+        # background
+        background = psd.getLayerSet(con.layers['BACKGROUND'])
+        if self.layout.is_nyx: background = psd.getLayerSet(con.layers['NYX'])
+        psd.getLayer(self.layout.background, background).visible = True
+
+        # Content aware fill
+        docref.activeLayer = self.art_layer
+        psd.content_fill_empty_area()
             
    
 class NicknameLargeTemplate (temp.NormalTemplate):
@@ -236,30 +252,38 @@ class NicknameLargeTemplate (temp.NormalTemplate):
         return "WarpDandy/NicknameLarge"
 
     def template_suffix (self):
-        return "Ikoria L"
+        return "Nickname L"
 
+    # OPTIONAL
     def __init__ (self, layout):
-        # strip out reminder text for fullart
+        # DO STUFF
         super().__init__(layout)
+        # full art
+        self.art_reference = psd.getLayer(con.layers['ART_FRAME']) 
+        
+    # OPTIONAL
+    def enable_frame_layers(self):
 
-    def enable_frame_layers (self):
+        # Easy reference
+        docref = app.activeDocument
 
         # twins and pt box
         psd.getLayer(self.layout.twins, con.layers['TWINS']).visible = True
-        if self.is_creature:
-            psd.getLayer(self.layout.twins, con.layers['PT_BOX']).visible = True
+        if self.is_creature: psd.getLayer(self.layout.twins, con.layers['PT_BOX']).visible = True
 
         # pinlines
         pinlines = psd.getLayerSet(con.layers['PINLINES_TEXTBOX'])
-        if self.is_land:
-            pinlines = psd.getLayerSet(con.layers['LAND_PINLINES_TEXTBOX'])
+        if self.is_land: pinlines = psd.getLayerSet(con.layers['LAND_PINLINES_TEXTBOX'])
         psd.getLayer(self.layout.pinlines, pinlines).visible = True
 
-        if self.is_legendary:
-            # legendary crown
-            psd.getLayer(self.layout.pinlines, con.layers['LEGENDARY_CROWN']).visible = True
-            app.activeDocument.activeLayer = pinlines
-            psd.enable_active_layer_mask()
+        # background
+        background = psd.getLayerSet(con.layers['BACKGROUND'])
+        if self.layout.is_nyx: background = psd.getLayerSet(con.layers['NYX'])
+        psd.getLayer(self.layout.background, background).visible = True
+
+        # Content aware fill
+        docref.activeLayer = self.art_layer
+        psd.content_fill_empty_area()
             
 class GoldenAgeTemplate (temp.NormalFullartTemplate):
     """
@@ -531,7 +555,7 @@ class PinlinesExtNeonTemplate (temp.NormalTemplate):
         return "WarpDandy/PinlinesExtNeon"
     
     def template_suffix (self):
-        return "PinlinesExtNeon"
+        return "Neon Extended"
     
     # OPTIONAL
     def __init__ (self, layout):
@@ -577,7 +601,7 @@ class MysticalArchiveTemplate (temp.NormalTemplate):
         # DO STUFF
         super().__init__(layout)
         # full art
-        self.art_reference = psd.getLayer(con.layers['FULL_ART_FRAME']) 
+        self.art_reference = psd.getLayer(con.layers['ART_FRAME']) 
         
     # OPTIONAL
     def enable_frame_layers(self):
@@ -602,6 +626,65 @@ class MysticalArchiveTemplate (temp.NormalTemplate):
         # Content aware fill
         docref.activeLayer = self.art_layer
         psd.content_fill_empty_area() 
+        
+class FangExtendedTemplate (temp.NormalTemplate):
+    """
+     * Created by WarpDandy
+    """
+    def template_file_name (self):
+        return "WarpDandy/FangExtended"
+    
+    def template_suffix (self):
+        return "Fang Extended"
+    
+    # OPTIONAL
+    def __init__ (self, layout):
+        # DO STUFF
+        super().__init__(layout)
+    
+    # OPTIONAL
+    def enable_frame_layers(self):
+
+        # Easy reference
+        docref = app.activeDocument
+
+        # twins and pt box
+        psd.getLayer(self.layout.twins, con.layers['TWINS']).visible = True
+        if self.is_creature: psd.getLayer(self.layout.twins, con.layers['PT_BOX']).visible = True
+
+        # pinlines
+        pinlines = psd.getLayerSet(con.layers['PINLINES_TEXTBOX'])
+        if self.is_land: pinlines = psd.getLayerSet(con.layers['LAND_PINLINES_TEXTBOX'])
+        psd.getLayer(self.layout.pinlines, pinlines).visible = True
+
+        # background
+        background = psd.getLayerSet(con.layers['BACKGROUND'])
+        if self.layout.is_nyx: background = psd.getLayerSet(con.layers['NYX'])
+        psd.getLayer(self.layout.background, background).visible = True
+
+        # Content aware fill
+        docref.activeLayer = self.art_layer
+        psd.content_fill_empty_area()
+        
+class GoldenAgeFullArtTemplate (temp.NormalTemplate):
+    """
+     * Created by WarpDandy
+    """
+    def template_file_name (self):
+        return "WarpDandy/GoldenAgeFullArt"
+    
+    def template_suffix (self):
+        return "Golden Age Full Art"
+    
+    # OPTIONAL
+    def __init__ (self, layout):
+        # DO STUFF
+        super().__init__(layout)
+    
+    # OPTIONAL
+    def enable_frame_layers (self):
+        # DO STUFF
+        super().enable_frame_layers()
         
 """
 Planeswalker templates
