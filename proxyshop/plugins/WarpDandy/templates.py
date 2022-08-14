@@ -262,48 +262,6 @@ class NicknameMediumTemplate (temp.NormalTemplate):
         docref.activeLayer = self.art_layer
         psd.content_fill_empty_area()
             
-   
-class NicknameLargeTemplate (temp.NormalTemplate):
-    """
-     * Requires manually adding the nickname
-    """
-    def template_file_name (self):
-        return "WarpDandy/NicknameLarge"
-
-    def template_suffix (self):
-        return "Nickname L"
-
-    # OPTIONAL
-    def __init__ (self, layout):
-        # DO STUFF
-        super().__init__(layout)
-        # full art
-        self.art_reference = psd.getLayer(con.layers['ART_FRAME']) 
-        
-    # OPTIONAL
-    def enable_frame_layers(self):
-
-        # Easy reference
-        docref = app.activeDocument
-
-        # twins and pt box
-        psd.getLayer(self.layout.twins, con.layers['TWINS']).visible = True
-        if self.is_creature: psd.getLayer(self.layout.twins, con.layers['PT_BOX']).visible = True
-
-        # pinlines
-        pinlines = psd.getLayerSet(con.layers['PINLINES_TEXTBOX'])
-        if self.is_land: pinlines = psd.getLayerSet(con.layers['LAND_PINLINES_TEXTBOX'])
-        psd.getLayer(self.layout.pinlines, pinlines).visible = True
-
-        # background
-        background = psd.getLayerSet(con.layers['BACKGROUND'])
-        if self.layout.is_nyx: background = psd.getLayerSet(con.layers['NYX'])
-        psd.getLayer(self.layout.background, background).visible = True
-
-        # Content aware fill
-        docref.activeLayer = self.art_layer
-        psd.content_fill_empty_area()
-            
 class GoldenAgeTemplate (temp.NormalFullartTemplate):
     """
      * Created by WarpDandy
