@@ -643,6 +643,13 @@ class FangExtendedTemplate (temp.NormalTemplate):
         docref.activeLayer = self.art_layer
         psd.content_fill_empty_area()
         
+        if self.is_legendary:
+            # legendary crown
+            psd.getLayer(self.layout.pinlines, con.layers['LEGENDARY_CROWN']).visible = True
+            border = psd.getLayerSet(con.layers['BORDER'])
+            psd.getLayer(con.layers['NORMAL_BORDER'], border).visible = False
+            psd.getLayer(con.layers['LEGENDARY_BORDER'], border).visible = True
+        
 class GoldenAgeFullArtTemplate (temp.NormalTemplate):
     """
      * Created by WarpDandy
@@ -652,6 +659,26 @@ class GoldenAgeFullArtTemplate (temp.NormalTemplate):
     
     def template_suffix (self):
         return "Golden Age Full Art"
+    
+    # OPTIONAL
+    def __init__ (self, layout):
+        # DO STUFF
+        super().__init__(layout)
+    
+    # OPTIONAL
+    def enable_frame_layers (self):
+        # DO STUFF
+        super().enable_frame_layers()
+        
+class ClassicTallArtBasicTemplate (temp.NormalTemplate):
+    """
+     * Created by WarpDandy
+    """
+    def template_file_name (self):
+        return "WarpDandy/ClassicTallArtBasic"
+    
+    def template_suffix (self):
+        return "Classic Tall Art Basic"
     
     # OPTIONAL
     def __init__ (self, layout):
