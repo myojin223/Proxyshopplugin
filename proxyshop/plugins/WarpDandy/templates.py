@@ -145,7 +145,7 @@ class MirrorTemplate (temp.NormalTemplate):
         return "WarpDandy/Mirror"
     
     def template_suffix (self):
-        return "Left-Handed"
+        return "Mirror"
     
     # OPTIONAL
     def __init__ (self, layout):
@@ -670,15 +670,15 @@ class GoldenAgeFullArtTemplate (temp.NormalTemplate):
         # DO STUFF
         super().enable_frame_layers()
         
-class ClassicTallArtBasicTemplate (temp.NormalTemplate):
+class TallArtClassicTemplate (temp.NormalTemplate):
     """
      * Created by WarpDandy
     """
     def template_file_name (self):
-        return "WarpDandy/ClassicTallArtBasic"
+        return "WarpDandy/TallArtClassic"
     
     def template_suffix (self):
-        return "Classic Tall Art Basic"
+        return "Tall Art Classic"
     
     # OPTIONAL
     def __init__ (self, layout):
@@ -689,6 +689,34 @@ class ClassicTallArtBasicTemplate (temp.NormalTemplate):
     def enable_frame_layers (self):
         # DO STUFF
         super().enable_frame_layers()
+        
+class SilvanMDFCBackTemplate (temp.MDFCBackTemplate):
+    """
+    Silvan Full template modified for MDFC
+    """
+    template_file_name = "WarpDandy/full-mdfc-back"
+    dfc_layer_group = con.layers['MDFC_BACK']
+    template_suffix = "Full"
+
+    def __init__(self, layout):
+        cfg.remove_reminder = True
+        super().__init__(layout)
+
+    def load_artwork(self):
+        super().load_artwork()
+
+        # Content aware fill
+        psd.content_fill_empty_area(self.art_layer)
+
+
+class SilvanMDFCFrontTemplate (SilvanMDFCBackTemplate):
+    """
+    Silvan Full template modified for MDFC
+    """
+    template_file_name = "WarpDandy/full-mdfc-front"
+    dfc_layer_group = con.layers['MDFC_FRONT']
+    template_suffix = "Full"
+
         
 """
 Planeswalker templates
