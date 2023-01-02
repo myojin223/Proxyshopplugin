@@ -2,733 +2,533 @@
 WARPDANDY TEMPLATES
 """
 import os
+from functools import cached_property
+from typing import Optional
+
 import proxyshop.frame_logic as frame_logic
 import proxyshop.format_text as format_text
-import proxyshop.text_layers as txt_layers
+import proxyshop.text_layers as text_classes
 import proxyshop.templates as temp
 import proxyshop.constants as con
 import proxyshop.settings as cfg
 import proxyshop.helpers as psd
+
+from photoshop.api._artlayer import ArtLayer
 import photoshop.api as ps
 app = ps.Application()
+
 
 class FullartTrixTemplate (temp.NormalTemplate):
     """
      * Port of TrixAreForScoot Proximity Template
      * Created by WarpDandy & TrixAreForScoot
     """
-    def template_file_name (self):
-        return "WarpDandy/FullartTrix"
-    
-    def template_suffix (self):
-        return "FullartTrix"
-    
-    # OPTIONAL
-    def __init__ (self, layout):
-        # DO STUFF
-        super().__init__(layout)
-    
-    # OPTIONAL
-    def enable_frame_layers (self):
-        # DO STUFF
-        super().enable_frame_layers()
+    template_file_name = "WarpDandy/FullartTrix"
+    template_suffix = "FullartTrix"
 
- 
-class LegendsTemplate (temp.NormalClassicTemplate):
-    """
-     * Created by WarpDandy
-    """
-    def template_file_name (self):
-        return "WarpDandy/Legends"
-    
-    def template_suffix (self):
-        return "Legends"
-    
-    # OPTIONAL
-    def __init__ (self, layout):
-        # DO STUFF
-        super().__init__(layout)
-    
-    # OPTIONAL
-    def enable_frame_layers (self):
-        # DO STUFF
-        super().enable_frame_layers()
- 
- 
+    @property
+    def is_nyx(self) -> bool:
+        return False
+
+    @property
+    def is_companion(self) -> bool:
+        return False
+
+
 class SamuraiTemplate (temp.NormalTemplate):
     """
      * Created by WarpDandy
     """
-    def template_file_name (self):
-        return "WarpDandy/Samurai"
-    
-    def template_suffix (self):
-        return "Samurai"
-    
-    # OPTIONAL
-    def __init__ (self, layout):
-        # DO STUFF
-        super().__init__(layout)
-    
-    # OPTIONAL
-    def enable_frame_layers (self):
-        # DO STUFF
-        super().enable_frame_layers()
+    template_file_name = "WarpDandy/Samurai"
+    template_suffix = "Samurai"
+
+    @property
+    def is_nyx(self) -> bool:
+        return False
+
+    @property
+    def is_companion(self) -> bool:
+        return False
+
+    @property
+    def background_layer(self) -> Optional[ArtLayer]:
+        return
+
+    @property
+    def twins_layer(self) -> Optional[ArtLayer]:
+        return
         
 
 class NinjaTemplate (temp.NormalTemplate):
     """
      * Created by WarpDandy
     """
-    def template_file_name (self):
-        return "WarpDandy/Ninja"
-    
-    def template_suffix (self):
-        return "Ninja"
-    
-    # OPTIONAL
-    def __init__ (self, layout):
-        # DO STUFF
-        super().__init__(layout)
-    
-    # OPTIONAL
-    def enable_frame_layers (self):
-        # DO STUFF
-        super().enable_frame_layers()
+    template_file_name = "WarpDandy/Ninja"
+    template_suffix = "Ninja"
+
+    @property
+    def is_nyx(self) -> bool:
+        return False
+
+    @property
+    def is_companion(self) -> bool:
+        return False
+
+    @property
+    def background_layer(self) -> Optional[ArtLayer]:
+        return
+
+    @property
+    def twins_layer(self) -> Optional[ArtLayer]:
+        return
  
  
 class NinjaGlitchTemplate (temp.NormalTemplate):
     """
      * Created by WarpDandy
     """
-    def template_file_name (self):
-        return "WarpDandy/NinjaGlitch"
-    
-    def template_suffix (self):
-        return "Glitch Ninja"
-    
-    # OPTIONAL
-    def __init__ (self, layout):
-        # DO STUFF
-        super().__init__(layout)
-    
-    # OPTIONAL
-    def enable_frame_layers(self):
+    template_file_name = "WarpDandy/NinjaGlitch"
+    template_suffix = "Glitch Ninja"
 
-        # Easy reference
-        docref = app.activeDocument
+    @property
+    def is_nyx(self) -> bool:
+        return False
 
-        # twins and pt box
-        psd.getLayer(self.layout.twins, con.layers['TWINS']).visible = True
-        if self.is_creature: psd.getLayer(self.layout.twins, con.layers['PT_BOX']).visible = True
+    @property
+    def is_companion(self) -> bool:
+        return False
 
-        # pinlines
-        pinlines = psd.getLayerSet(con.layers['PINLINES_TEXTBOX'])
-        if self.is_land: pinlines = psd.getLayerSet(con.layers['LAND_PINLINES_TEXTBOX'])
-        psd.getLayer(self.layout.pinlines, pinlines).visible = True
+    @property
+    def background_layer(self) -> Optional[ArtLayer]:
+        return
 
-        # background
-        background = psd.getLayerSet(con.layers['BACKGROUND'])
-        if self.layout.is_nyx: background = psd.getLayerSet(con.layers['NYX'])
-        psd.getLayer(self.layout.background, background).visible = True
+    @property
+    def twins_layer(self) -> Optional[ArtLayer]:
+        return
 
-        # Content aware fill
-        docref.activeLayer = self.art_layer
-        psd.content_fill_empty_area()   
+    def load_artwork(self):
+        super().load_artwork()
+
+        # Content aware fill for extended art
+        psd.content_fill_empty_area(self.art_layer)
 
 
-class MirrorTemplate (temp.NormalTemplate):
+class MirroredTemplate (temp.NormalTemplate):
     """
      * Created by WarpDandy
     """
-    def template_file_name (self):
-        return "WarpDandy/Mirror"
-    
-    def template_suffix (self):
-        return "Mirror"
-    
-    # OPTIONAL
-    def __init__ (self, layout):
-        # DO STUFF
-        super().__init__(layout)
-    
-    # OPTIONAL
-    def enable_frame_layers (self):
-        # DO STUFF
-        super().enable_frame_layers()
+    template_file_name = "WarpDandy/Mirrored"
+    template_suffix = "Mirrored"
+
+    def basic_text_layers(self):
+        # Flip scaling on text layers
+        self.text.extend([
+            text_classes.FormattedTextField(
+                layer=self.text_layer_mana,
+                contents=self.layout.mana_cost
+            ),
+            text_classes.ScaledTextField(
+                layer=self.text_layer_name,
+                contents=self.layout.name,
+                reference=self.text_layer_mana,
+                flip_scale=True
+            ),
+            text_classes.ScaledTextField(
+                layer=self.text_layer_type,
+                contents=self.layout.type_line,
+                reference=self.expansion_symbol,
+                flip_scale=True
+            )
+        ])
          
  
 class ClassicWhiteBorderTemplate (temp.NormalClassicTemplate):
     """
      * Created by WarpDandy
     """
-    def template_file_name (self):
-        return "WarpDandy/ClassicWhiteBorder"
-    
-    def template_suffix (self):
-        return "Classic WB"
-    
-    # OPTIONAL
-    def __init__ (self, layout):
-        # DO STUFF
-        super().__init__(layout)
-    
-    # OPTIONAL
-    def enable_frame_layers (self):
-        # DO STUFF
-        super().enable_frame_layers()
- 
+    template_file_name = "WarpDandy/ClassicWhiteBorder"
+    template_suffix = "Classic WB"
+
+
 class NicknameSmallTemplate (temp.NormalTemplate):
     """
      * Requires manually adding the nickname
     """
-    def template_file_name (self):
-        return "WarpDandy/NicknameSmall"
+    template_file_name = "WarpDandy/NicknameSmall"
+    template_suffix = "Nickname S"
 
-    def template_suffix (self):
-        return "Nickname S"
+    def __int__(self, layout):
+        cfg.exit_early = True
+        super().__int__(layout)
 
-    # OPTIONAL
-    def __init__ (self, layout):
-        # DO STUFF
-        super().__init__(layout)
-        # full art
-        self.art_reference = psd.getLayer(con.layers['ART_FRAME']) 
-        
-    # OPTIONAL
-    def enable_frame_layers(self):
+    @property
+    def is_nyx(self) -> bool:
+        return False
 
-        # Easy reference
-        docref = app.activeDocument
+    @property
+    def is_companion(self) -> bool:
+        return False
 
-        # twins and pt box
-        psd.getLayer(self.layout.twins, con.layers['TWINS']).visible = True
-        if self.is_creature: psd.getLayer(self.layout.twins, con.layers['PT_BOX']).visible = True
+    @property
+    def background_layer(self) -> Optional[ArtLayer]:
+        return
 
-        # pinlines
-        pinlines = psd.getLayerSet(con.layers['PINLINES_TEXTBOX'])
-        if self.is_land: pinlines = psd.getLayerSet(con.layers['LAND_PINLINES_TEXTBOX'])
-        psd.getLayer(self.layout.pinlines, pinlines).visible = True
+    @cached_property
+    def art_reference_layer(self) -> Optional[ArtLayer]:
+        return psd.getLayer(con.layers['ART_FRAME'])
 
-        # background
-        background = psd.getLayerSet(con.layers['BACKGROUND'])
-        if self.layout.is_nyx: background = psd.getLayerSet(con.layers['NYX'])
-        psd.getLayer(self.layout.background, background).visible = True
+    def load_artwork(self):
+        super().load_artwork()
 
-        # Content aware fill
-        docref.activeLayer = self.art_layer
-        psd.content_fill_empty_area()
+        # Content aware fill for extended art
+        psd.content_fill_empty_area(self.art_layer)
            
-
 
 class NicknameMediumTemplate (temp.NormalTemplate):
     """
      * Requires manually adding the nickname
     """
-    def template_file_name (self):
-        return "WarpDandy/NicknameMedium"
+    template_file_name = "WarpDandy/NicknameMedium"
+    template_suffix = "Nickname M"
 
-    def template_suffix (self):
-        return "Nickname M"
+    def __int__(self, layout):
+        cfg.exit_early = True
+        super().__int__(layout)
 
-    # OPTIONAL
-    def __init__ (self, layout):
-        # DO STUFF
-        super().__init__(layout)
-        # full art
-        self.art_reference = psd.getLayer(con.layers['ART_FRAME']) 
-        
-    # OPTIONAL
-    def enable_frame_layers(self):
-
-        # Easy reference
-        docref = app.activeDocument
-
-        # twins and pt box
-        psd.getLayer(self.layout.twins, con.layers['TWINS']).visible = True
-        if self.is_creature: psd.getLayer(self.layout.twins, con.layers['PT_BOX']).visible = True
-
-        # pinlines
-        pinlines = psd.getLayerSet(con.layers['PINLINES_TEXTBOX'])
-        if self.is_land: pinlines = psd.getLayerSet(con.layers['LAND_PINLINES_TEXTBOX'])
-        psd.getLayer(self.layout.pinlines, pinlines).visible = True
-
-        # background
-        background = psd.getLayerSet(con.layers['BACKGROUND'])
-        if self.layout.is_nyx: background = psd.getLayerSet(con.layers['NYX'])
-        psd.getLayer(self.layout.background, background).visible = True
-
-        # Content aware fill
-        docref.activeLayer = self.art_layer
-        psd.content_fill_empty_area()
-            
-class GoldenAgeTemplate (temp.NormalFullartTemplate):
-    """
-     * Created by WarpDandy
-    """
-    def template_file_name (self):
-        return "WarpDandy/GoldenAge"
+    @property
+    def is_nyx(self) -> bool:
+        return False
     
-    def template_suffix (self):
-        return "Golden Age"
+    @property
+    def is_companion(self) -> bool:
+        return False
     
-    # OPTIONAL
-    def __init__ (self, layout):
-        # DO STUFF
-        super().__init__(layout)
-    
-    # OPTIONAL
-    def enable_frame_layers (self):
-        # DO STUFF
-        super().enable_frame_layers()
-       
+    @property
+    def background_layer(self) -> Optional[ArtLayer]:
+        return
+
+    @property
+    def twins_layer(self) -> Optional[ArtLayer]:
+        return
+
+    @cached_property
+    def art_reference_layer(self) -> Optional[ArtLayer]:
+        return psd.getLayer(con.layers['ART_FRAME'])
+
+    def load_artwork(self):
+        super().load_artwork()
+
+        # Content aware fill for extended art
+        psd.content_fill_empty_area(self.art_layer)
+
+
 class GoldenAge2Template (temp.NormalTemplate):
     """
      * Created by WarpDandy
     """
-    def template_file_name (self):
-        return "WarpDandy/GoldenAge2"
-    
-    def template_suffix (self):
-        return "Golden Age 2"
-    
-    # OPTIONAL
-    def __init__ (self, layout):
-        # DO STUFF
-        super().__init__(layout)
-    
-    # OPTIONAL
-    def enable_frame_layers (self):
-        # DO STUFF
-        super().enable_frame_layers()
-        
+    template_file_name = "WarpDandy/GoldenAge2"
+    template_suffix = "Golden Age 2"
+
+    @property
+    def is_nyx(self) -> bool:
+        return False
+
+    @property
+    def is_companion(self) -> bool:
+        return False
+
+    @property
+    def background_layer(self) -> Optional[ArtLayer]:
+        return
+
+    @property
+    def twins_layer(self) -> Optional[ArtLayer]:
+        return
+
+
 class zneExpeditionTemplate (temp.NormalTemplate):
     """
      * Created by WarpDandy
     """
-    def template_file_name (self):
-        return "WarpDandy/zneExpedition"
-    
-    def template_suffix (self):
-        return "Original Expedition"
-    
-    # OPTIONAL
-    def __init__ (self, layout):
-        # DO STUFF
-        super().__init__(layout)
-    
-    # OPTIONAL
-    def enable_frame_layers (self):
-        # DO STUFF
-        super().enable_frame_layers()
-        
+    template_file_name = "WarpDandy/zneExpedition"
+    template_suffix = "Original Expedition"
+
+    @property
+    def is_nyx(self) -> bool:
+        return False
+
+    @property
+    def is_legendary(self) -> bool:
+        return False
+
+    @property
+    def background_layer(self) -> Optional[ArtLayer]:
+        return
+
+    @property
+    def twins_layer(self) -> Optional[ArtLayer]:
+        return
+
+
 class SkyscraperTemplate (temp.NormalTemplate):
     """
      * Created by WarpDandy
     """
-    def template_file_name (self):
-        return "WarpDandy/Skyscraper"
-    
-    def template_suffix (self):
-        return "Skyscraper"
-    
-    # OPTIONAL
-    def __init__ (self, layout):
-        # DO STUFF
-        super().__init__(layout)
-    
-    # OPTIONAL
-    def enable_frame_layers (self):
-        # DO STUFF
-        super().enable_frame_layers()
-        
+    template_file_name = "WarpDandy/Skyscraper"
+    template_suffix = "Skyscraper"
+
+    @property
+    def is_nyx(self) -> bool:
+        return False
+
+    @property
+    def is_legendary(self) -> bool:
+        return False
+
+    @property
+    def background_layer(self) -> Optional[ArtLayer]:
+        return
+
+    @property
+    def twins_layer(self) -> Optional[ArtLayer]:
+        return
+
+
 class GoldenAgeV2Template (temp.NormalTemplate):
     """
      * Created by MrOppsokopolis
     """
-    def template_file_name (self):
-        return "WarpDandy/GoldenAgeV2"
-    
-    def template_suffix (self):
-        return "Golden Age V2"
-    
-    # OPTIONAL
-    def __init__ (self, layout):
-        # DO STUFF
-        super().__init__(layout)
-    
-    # OPTIONAL
-    def enable_frame_layers (self):
-        # DO STUFF
-        super().enable_frame_layers()
-        
+    template_file_name = "WarpDandy/GoldenAgeV2"
+    template_suffix = "Golden Age V2"
+
+    @property
+    def is_nyx(self) -> bool:
+        return False
+
+    @property
+    def is_companion(self) -> bool:
+        return False
+
+    @property
+    def background_layer(self) -> Optional[ArtLayer]:
+        return
+
+    @property
+    def twins_layer(self) -> Optional[ArtLayer]:
+        return
+
+
 class ArtDecoTemplate (temp.NormalTemplate):
     """
      * Created by WarpDandy
     """
-    def template_file_name (self):
-        return "WarpDandy/ArtDeco"
-    
-    def template_suffix (self):
-        return "Art Deco"
-    
-    # OPTIONAL
-    def __init__ (self, layout):
-        # DO STUFF
-        super().__init__(layout)
-    
-    # OPTIONAL
-    def enable_frame_layers (self):
-        # DO STUFF
-        super().enable_frame_layers()
-        
+    template_file_name = "WarpDandy/ArtDeco"
+    template_suffix = "Art Deco"
+
+    @property
+    def is_companion(self) -> bool:
+        return False
+
+    @property
+    def is_nyx(self) -> bool:
+        return False
+
+    @property
+    def background_layer(self) -> Optional[ArtLayer]:
+        return
+
+    @property
+    def twins_layer(self) -> Optional[ArtLayer]:
+        return
+
+
 class UniversesBeyondTemplate (temp.NormalTemplate):
     """
      * Created by WarpDandy
     """
-    def template_file_name (self):
-        return "WarpDandy/UniversesBeyond"
-    
-    def template_suffix (self):
-        return "Universes Beyond"
-    
-    # OPTIONAL
-    def __init__ (self, layout):
-        # DO STUFF
-        super().__init__(layout)
-    
-    # OPTIONAL
-    def enable_frame_layers (self):
-        # DO STUFF
-        super().enable_frame_layers()
-        
-class ClassicBorderlessShortTemplate (temp.NormalTemplate):
-    """
-     * Created by WarpDandy
-    """
-    def template_file_name (self):
-        return "WarpDandy/ClassicBorderlessShort"
-    
-    def template_suffix (self):
-        return "Classic Borderless Short"
-    
-    # OPTIONAL
-    def __init__(self, layout):
-        # strip out reminder text for extended cards
-        cfg.remove_reminder = True
-        super().__init__(layout)
-        # art
-        self.art_reference = psd.getLayer(con.layers['ART_FRAME'])
+    template_file_name = "WarpDandy/UniversesBeyond"
+    template_suffix = "Universes Beyond"
 
-    def enable_frame_layers(self):
+    @property
+    def is_nyx(self) -> bool:
+        return False
 
-        # Easy reference
-        docref = app.activeDocument
+    @property
+    def is_legendary(self) -> bool:
+        return False
 
-        # twins and pt box
-        psd.getLayer(self.layout.twins, con.layers['TWINS']).visible = True
-        if self.is_creature: psd.getLayer(self.layout.twins, con.layers['PT_BOX']).visible = True
+    @property
+    def background_layer(self) -> Optional[ArtLayer]:
+        return
 
-        # pinlines
-        pinlines = psd.getLayerSet(con.layers['PINLINES_TEXTBOX'])
-        if self.is_land: pinlines = psd.getLayerSet(con.layers['LAND_PINLINES_TEXTBOX'])
-        psd.getLayer(self.layout.pinlines, pinlines).visible = True
+    @property
+    def twins_layer(self) -> Optional[ArtLayer]:
+        return
 
-        # background
-        background = psd.getLayerSet(con.layers['BACKGROUND'])
-        if self.layout.is_nyx: background = psd.getLayerSet(con.layers['NYX'])
-        psd.getLayer(self.layout.background, background).visible = True
 
-        if self.is_legendary:
-            # legendary crown
-            crown = psd.getLayerSet(con.layers['LEGENDARY_CROWN'])
-            psd.getLayer(self.layout.pinlines, crown).visible = True
-            psd.getLayer(con.layers['NORMAL_BORDER'], con.layers['BORDER']).visible = False
-            psd.getLayer(con.layers['LEGENDARY_BORDER'], con.layers['BORDER']).visible = True
-
-            # Mask the top border sides
-            docref.activeLayer = background
-            psd.enable_active_layer_mask()
-
-            # enable companion texture
-            if self.is_companion: psd.getLayer(self.layout.pinlines, con.layers['COMPANION']).visible = True
-
-            # Hollow crown
-            if self.layout.is_nyx or self.is_companion:
-                # Enable the hollow crown shadow and layer mask on crown, pinlines, and shadows
-                super().enable_hollow_crown(crown, pinlines)
-                docref.activeLayer = psd.getLayer("Shadows Light", "Shadows")
-                psd.enable_active_layer_mask()
-
-        # Content aware fill
-        docref.activeLayer = self.art_layer
-        psd.content_fill_empty_area()
-        
-class EighthTemplate (temp.NormalTemplate):
-    """
-     * Created by WarpDandy
-    """
-    def template_file_name (self):
-        return "WarpDandy/Eighth"
-    
-    def template_suffix (self):
-        return "Eighth"
-    
-    # OPTIONAL
-    def __init__ (self, layout):
-        # DO STUFF
-        super().__init__(layout)
-    
-    # OPTIONAL
-    def enable_frame_layers (self):
-        # DO STUFF
-        super().enable_frame_layers()
-         
 class EtchedTemplate (temp.NormalTemplate):
     """
      * Created by WarpDandy
     """
-    def template_file_name (self):
-        return "WarpDandy/Etched"
-    
-    def template_suffix (self):
-        return "Etched"
-    
-    # OPTIONAL
-    def __init__ (self, layout):
-        # DO STUFF
-        super().__init__(layout)
-    
-    # OPTIONAL
-    def enable_frame_layers (self):
-        # DO STUFF
-        super().enable_frame_layers() 
-        
+    template_file_name = "WarpDandy/Etched"
+    template_suffix = "Etched"
+
+    @property
+    def is_legendary(self) -> bool:
+        return False
+
+    @property
+    def is_nyx(self) -> bool:
+        return False
+
+    @property
+    def background_layer(self) -> Optional[ArtLayer]:
+        return
+
+    @property
+    def twins_layer(self) -> Optional[ArtLayer]:
+        return
+
+
 class DestinyTemplate (temp.NormalTemplate):
     """
      * Created by Meeple, ported to Proxyshop by WarpDandy
     """
-    def template_file_name (self):
-        return "WarpDandy/Destiny"
-    
-    def template_suffix (self):
-        return "Destiny"
-    
-    # OPTIONAL
-    def __init__ (self, layout):
-        # DO STUFF
-        super().__init__(layout)
-    
-    # OPTIONAL
-    def enable_frame_layers (self):
-        # DO STUFF
-        super().enable_frame_layers()
+    template_file_name = "WarpDandy/Destiny"
+    template_suffix = "Destiny"
+
+    @property
+    def is_nyx(self) -> bool:
+        return False
+
+    @property
+    def is_companion(self) -> bool:
+        return False
+
+    @property
+    def background_layer(self) -> Optional[ArtLayer]:
+        return
+
+    @property
+    def twins_layer(self) -> Optional[ArtLayer]:
+        return
+
         
 class PinlinesExtNeonTemplate (temp.NormalTemplate):
     """
      * Created by WarpDandy
     """
-    def template_file_name (self):
-        return "WarpDandy/PinlinesExtNeon"
-    
-    def template_suffix (self):
-        return "Neon Extended"
-    
-    # OPTIONAL
-    def __init__ (self, layout):
-        # DO STUFF
-        super().__init__(layout)
-    
-    # OPTIONAL
-    def enable_frame_layers(self):
+    template_file_name = "WarpDandy/PinlinesExtNeon"
+    template_suffix = "Neon Extended"
 
-        # Easy reference
-        docref = app.activeDocument
+    @property
+    def is_nyx(self) -> bool:
+        return False
 
-        # twins and pt box
-        psd.getLayer(self.layout.twins, con.layers['TWINS']).visible = True
-        if self.is_creature: psd.getLayer(self.layout.twins, con.layers['PT_BOX']).visible = True
+    @property
+    def is_companion(self) -> bool:
+        return False
 
-        # pinlines
-        pinlines = psd.getLayerSet(con.layers['PINLINES_TEXTBOX'])
-        if self.is_land: pinlines = psd.getLayerSet(con.layers['LAND_PINLINES_TEXTBOX'])
-        psd.getLayer(self.layout.pinlines, pinlines).visible = True
+    @property
+    def background_layer(self) -> Optional[ArtLayer]:
+        return
 
-        # background
-        background = psd.getLayerSet(con.layers['BACKGROUND'])
-        if self.layout.is_nyx: background = psd.getLayerSet(con.layers['NYX'])
-        psd.getLayer(self.layout.background, background).visible = True
+    @property
+    def twins_layer(self) -> Optional[ArtLayer]:
+        return
 
+    @property
+    def color_indicator_layer(self) -> Optional[ArtLayer]:
+        return
+
+    def load_artwork(self):
         # Content aware fill
-        docref.activeLayer = self.art_layer
-        psd.content_fill_empty_area()
-        
+        super().load_artwork()
+        psd.content_fill_empty_area(self.art_layer)
+
+
 class MysticalArchiveTemplate (temp.NormalTemplate):
     """
      * Created by WarpDandy
     """
-    def template_file_name (self):
-        return "WarpDandy/MysticalArchive"
-    
-    def template_suffix (self):
-        return "Mystical Archive"
-    
-    # OPTIONAL
-    def __init__ (self, layout):
-        # DO STUFF
-        super().__init__(layout)
-        # full art
-        self.art_reference = psd.getLayer(con.layers['ART_FRAME']) 
-        
-    # OPTIONAL
-    def enable_frame_layers(self):
+    template_file_name = "WarpDandy/MysticalArchive"
+    template_suffix = "Mystical Archive"
 
-        # Easy reference
-        docref = app.activeDocument
+    @property
+    def is_legendary(self) -> bool:
+        return False
 
-        # twins and pt box
-        psd.getLayer(self.layout.twins, con.layers['TWINS']).visible = True
-        if self.is_creature: psd.getLayer(self.layout.twins, con.layers['PT_BOX']).visible = True
+    @property
+    def is_nyx(self) -> bool:
+        return False
 
-        # pinlines
-        pinlines = psd.getLayerSet(con.layers['PINLINES_TEXTBOX'])
-        if self.is_land: pinlines = psd.getLayerSet(con.layers['LAND_PINLINES_TEXTBOX'])
-        psd.getLayer(self.layout.pinlines, pinlines).visible = True
+    @property
+    def background_layer(self) -> Optional[ArtLayer]:
+        return
 
-        # background
-        background = psd.getLayerSet(con.layers['BACKGROUND'])
-        if self.layout.is_nyx: background = psd.getLayerSet(con.layers['NYX'])
-        psd.getLayer(self.layout.background, background).visible = True
+    @property
+    def twins_layer(self) -> Optional[ArtLayer]:
+        return
 
+    def load_artwork(self):
         # Content aware fill
-        docref.activeLayer = self.art_layer
-        psd.content_fill_empty_area() 
-        
+        super().load_artwork()
+        psd.content_fill_empty_area(self.art_layer)
+
+
 class FangExtendedTemplate (temp.NormalTemplate):
     """
      * Created by WarpDandy
     """
-    def template_file_name (self):
-        return "WarpDandy/FangExtended"
-    
-    def template_suffix (self):
-        return "Fang Extended"
-    
-    # OPTIONAL
-    def __init__ (self, layout):
-        # DO STUFF
-        super().__init__(layout)
-    
-    # OPTIONAL
-    def enable_frame_layers(self):
+    template_file_name = "WarpDandy/FangExtended"
+    template_suffix = "Fang Extended"
 
-        # Easy reference
-        docref = app.activeDocument
+    @property
+    def is_nyx(self) -> bool:
+        return False
 
-        # twins and pt box
-        psd.getLayer(self.layout.twins, con.layers['TWINS']).visible = True
-        if self.is_creature: psd.getLayer(self.layout.twins, con.layers['PT_BOX']).visible = True
+    @property
+    def is_companion(self) -> bool:
+        return False
 
-        # pinlines
-        pinlines = psd.getLayerSet(con.layers['PINLINES_TEXTBOX'])
-        if self.is_land: pinlines = psd.getLayerSet(con.layers['LAND_PINLINES_TEXTBOX'])
-        psd.getLayer(self.layout.pinlines, pinlines).visible = True
 
-        # background
-        background = psd.getLayerSet(con.layers['BACKGROUND'])
-        if self.layout.is_nyx: background = psd.getLayerSet(con.layers['NYX'])
-        psd.getLayer(self.layout.background, background).visible = True
-
-        # Content aware fill
-        docref.activeLayer = self.art_layer
-        psd.content_fill_empty_area()
-        
-        if self.is_legendary:
-            # legendary crown
-            psd.getLayer(self.layout.pinlines, con.layers['LEGENDARY_CROWN']).visible = True
-            border = psd.getLayerSet(con.layers['BORDER'])
-            psd.getLayer(con.layers['NORMAL_BORDER'], border).visible = False
-            psd.getLayer(con.layers['LEGENDARY_BORDER'], border).visible = True
-        
 class GoldenAgeFullArtTemplate (temp.NormalTemplate):
     """
      * Created by WarpDandy
     """
-    def template_file_name (self):
-        return "WarpDandy/GoldenAgeFullArt"
-    
-    def template_suffix (self):
-        return "Golden Age Full Art"
-    
-    # OPTIONAL
-    def __init__ (self, layout):
-        # DO STUFF
-        super().__init__(layout)
-    
-    # OPTIONAL
-    def enable_frame_layers (self):
-        # DO STUFF
-        super().enable_frame_layers()
-        
-class TallArtClassicTemplate (temp.NormalTemplate):
-    """
-     * Created by WarpDandy
-    """
-    def template_file_name (self):
-        return "WarpDandy/TallArtClassic"
-    
-    def template_suffix (self):
-        return "Tall Art Classic"
-    
-    # OPTIONAL
-    def __init__ (self, layout):
-        # DO STUFF
-        super().__init__(layout)
-    
-    # OPTIONAL
-    def enable_frame_layers (self):
-        # DO STUFF
-        super().enable_frame_layers()
-        
-class SilvanMDFCBackTemplate (temp.MDFCBackTemplate):
-    """
-    Silvan Full template modified for MDFC
-    """
-    template_file_name = "WarpDandy/full-mdfc-back"
-    dfc_layer_group = con.layers['MDFC_BACK']
-    template_suffix = "Full"
+    template_file_name = "WarpDandy/GoldenAgeFullArt"
+    template_suffix = "Golden Age Full Art"
 
-    def __init__(self, layout):
-        cfg.remove_reminder = True
-        super().__init__(layout)
+    @property
+    def is_nyx(self) -> bool:
+        return False
 
-    def load_artwork(self):
-        super().load_artwork()
+    @property
+    def is_companion(self) -> bool:
+        return False
 
-        # Content aware fill
-        psd.content_fill_empty_area(self.art_layer)
+    @property
+    def background_layer(self) -> Optional[ArtLayer]:
+        return
+
+    @property
+    def twins_layer(self) -> Optional[ArtLayer]:
+        return
 
 
-class SilvanMDFCFrontTemplate (SilvanMDFCBackTemplate):
-    """
-    Silvan Full template modified for MDFC
-    """
-    template_file_name = "WarpDandy/full-mdfc-front"
-    dfc_layer_group = con.layers['MDFC_FRONT']
-    template_suffix = "Full"
-
-        
 """
 Planeswalker templates
 """
+
+
 class ClassicPWTemplate (temp.PlaneswalkerTemplate):
     """
      * Planeswalker template - 3 or 4 loyalty abilities.
     """
-    def template_file_name (self):
-        return "WarpDandy/ClassicPW"
+    template_file_name = "WarpDandy/ClassicPW"
+    template_suffix = "Classic PW"
 
-    def __init__ (self, layout):
+    def __init__(self, layout):
         self.exit_early = True
         super().__init__(layout)
 
@@ -765,8 +565,8 @@ class ClassicPWTemplate (temp.PlaneswalkerTemplate):
                 # determine which loyalty group to enable, and set the loyalty symbol's text
                 loyalty_graphic = psd.getLayerSet(ability[0], ability_group)
                 loyalty_graphic.visible = True
-                self.tx_layers.append(
-                    txt_layers.TextField(
+                self.text.append(
+                    text_classes.TextField(
                         layer = psd.getLayer(con.layers['COST'], loyalty_graphic),
                         text_contents = ability[0:int(colon_index)],
                         text_color = psd.rgb_black(),
@@ -781,8 +581,8 @@ class ClassicPWTemplate (temp.PlaneswalkerTemplate):
                 static_text_layer.visible = True
                 psd.getLayer("Colon", ability_group).visible = False
 
-            self.tx_layers.append(
-                txt_layers.BasicFormattedTextField(
+            self.text.append(
+                text_classes.BasicFormattedTextField(
                     layer = ability_layer,
                     text_contents = ability,
                     text_color = psd.get_text_layer_color(ability_layer),
@@ -790,8 +590,8 @@ class ClassicPWTemplate (temp.PlaneswalkerTemplate):
             )
 
         # starting loyalty
-        self.tx_layers.append(
-            txt_layers.TextField(
+        self.text.append(
+            text_classes.TextField(
                 layer = psd.getLayer(con.layers['TEXT'], psd.getLayerSet(con.layers['STARTING_LOYALTY'], loyalty_group)),
                 text_contents = self.layout.scryfall['loyalty'],
                 text_color = psd.rgb_white(),
@@ -813,16 +613,14 @@ class ClassicPWTemplate (temp.PlaneswalkerTemplate):
         Enable card background
         """
         psd.getLayer(self.layout.background, psd.getLayerSet(con.layers['BACKGROUND'], self.docref)).visible = True
-        
-    def template_suffix (self):
-        return "Classic PW"
-        
+
+
 class ArtDecoPWTemplate (temp.PlaneswalkerTemplate):
     """
      * Planeswalker template - 3 or 4 loyalty abilities.
     """
-    def template_file_name (self):
-        return "WarpDandy/ArtDecoPW"
+    template_file_name = "WarpDandy/ArtDecoPW"
+    template_suffix = "Art Deco PW"
 
     def __init__ (self, layout):
         self.exit_early = True
@@ -861,8 +659,8 @@ class ArtDecoPWTemplate (temp.PlaneswalkerTemplate):
                 # determine which loyalty group to enable, and set the loyalty symbol's text
                 loyalty_graphic = psd.getLayerSet(ability[0], ability_group)
                 loyalty_graphic.visible = True
-                self.tx_layers.append(
-                    txt_layers.TextField(
+                self.text.append(
+                    text_classes.TextField(
                         layer = psd.getLayer(con.layers['COST'], loyalty_graphic),
                         text_contents = ability[0:int(colon_index)],
                         text_color = psd.rgb_white(),
@@ -877,8 +675,8 @@ class ArtDecoPWTemplate (temp.PlaneswalkerTemplate):
                 static_text_layer.visible = True
                 psd.getLayer("Colon", ability_group).visible = False
 
-            self.tx_layers.append(
-                txt_layers.BasicFormattedTextField(
+            self.text.append(
+                text_classes.BasicFormattedTextField(
                     layer = ability_layer,
                     text_contents = ability,
                     text_color = psd.get_text_layer_color(ability_layer),
@@ -886,8 +684,8 @@ class ArtDecoPWTemplate (temp.PlaneswalkerTemplate):
             )
 
         # starting loyalty
-        self.tx_layers.append(
-            txt_layers.TextField(
+        self.text.append(
+            text_classes.TextField(
                 layer = psd.getLayer(con.layers['TEXT'], psd.getLayerSet(con.layers['STARTING_LOYALTY'], loyalty_group)),
                 text_contents = self.layout.scryfall['loyalty'],
                 text_color = psd.rgb_white(),
@@ -909,6 +707,3 @@ class ArtDecoPWTemplate (temp.PlaneswalkerTemplate):
         Enable card background
         """
         psd.getLayer(self.layout.background, psd.getLayerSet(con.layers['BACKGROUND'], self.docref)).visible = True
-        
-    def template_suffix (self):
-        return "Art Deco PW"
