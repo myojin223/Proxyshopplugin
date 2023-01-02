@@ -46,14 +46,6 @@ class FullartTrixTemplate (temp.NormalTemplate):
         psd.getLayer(rarity.lower(), self.text_layers).visible = True
 
 
-class LegendsTemplate (temp.NormalClassicTemplate):
-    """
-     * Created by WarpDandy
-    """
-    template_file_name = "WarpDandy/Legends"
-    template_suffix = "Legends"
-
-
 class SamuraiTemplate (temp.NormalTemplate):
     """
      * Created by WarpDandy
@@ -132,12 +124,12 @@ class NinjaGlitchTemplate (temp.NormalTemplate):
         psd.content_fill_empty_area(self.art_layer)
 
 
-class MirrorTemplate (temp.NormalTemplate):
+class MirroredTemplate (temp.NormalTemplate):
     """
      * Created by WarpDandy
     """
-    template_file_name = "WarpDandy/Mirror"
-    template_suffix = "Mirror"
+    template_file_name = "WarpDandy/Mirrored"
+    template_suffix = "Mirrored"
 
     def basic_text_layers(self):
         # Flip scaling on text layers
@@ -250,35 +242,6 @@ class NicknameMediumTemplate (temp.NormalTemplate):
 
         # Content aware fill for extended art
         psd.content_fill_empty_area(self.art_layer)
-
-
-class GoldenAgeTemplate (temp.NormalFullartTemplate):
-    """
-     * Created by WarpDandy
-    """
-    template_file_name = "WarpDandy/GoldenAge"
-    template_suffix = "Golden Age"
-
-    def __init__(self, layout):
-        cfg.remove_flavor = True
-        cfg.remove_reminder = True
-        super().__init__(layout)
-
-    @property
-    def is_nyx(self) -> bool:
-        return False
-
-    @property
-    def is_companion(self) -> bool:
-        return False
-
-    @property
-    def background_layer(self) -> Optional[ArtLayer]:
-        return
-
-    @property
-    def twins_layer(self) -> Optional[ArtLayer]:
-        return
 
 
 class GoldenAge2Template (temp.NormalTemplate):
@@ -435,48 +398,6 @@ class UniversesBeyondTemplate (temp.NormalTemplate):
         return
 
 
-class ClassicBorderlessShortTemplate (temp.NormalTemplate):
-    """
-     * Created by WarpDandy
-    """
-    template_file_name = "WarpDandy/ClassicBorderlessShort"
-    template_suffix = "Classic Borderless Short"
-
-    def __init__(self, layout):
-        # strip out reminder text for extended cards
-        cfg.remove_reminder = True
-        cfg.remove_flavor = True
-        super().__init__(layout)
-
-    @cached_property
-    def art_reference_layer(self) -> Optional[ArtLayer]:
-        # Set art frame
-        return psd.getLayer(con.layers.ART_FRAME)
-
-    def load_artwork(self):
-        # Content aware fill
-        super().load_artwork()
-        psd.content_fill_empty_area(self.art_layer)
-
-    def enable_crown(self):
-        # Mask the top border sides
-        super().enable_crown()
-        self.active_layer = self.background_layer
-        psd.enable_active_layer_mask()
-
-
-class EighthTemplate (temp.NormalTemplate):
-    """
-     * Created by WarpDandy
-    """
-    template_file_name = "WarpDandy/Eighth"
-    template_suffix = "Eighth"
-
-    @property
-    def is_legendary(self) -> bool:
-        return False
-
-         
 class EtchedTemplate (temp.NormalTemplate):
     """
      * Created by WarpDandy
@@ -641,42 +562,6 @@ class GoldenAgeFullArtTemplate (temp.NormalTemplate):
     @property
     def twins_layer(self) -> Optional[ArtLayer]:
         return
-
-
-class TallArtClassicTemplate (temp.NormalTemplate):
-    """
-     * Created by WarpDandy
-    """
-    template_file_name = "WarpDandy/TallArtClassic"
-    template_suffix = "Tall Art Classic"
-
-
-class SilvanMDFCBackTemplate (temp.MDFCBackTemplate):
-    """
-    Silvan Full template modified for MDFC
-    """
-    template_file_name = "WarpDandy/full-mdfc-back"
-    dfc_layer_group = con.layers.MDFC_BACK
-    template_suffix = "Full"
-
-    def __init__(self, layout):
-        cfg.remove_reminder = True
-        super().__init__(layout)
-
-    def load_artwork(self):
-        super().load_artwork()
-
-        # Content aware fill
-        psd.content_fill_empty_area(self.art_layer)
-
-
-class SilvanMDFCFrontTemplate (SilvanMDFCBackTemplate):
-    """
-    Silvan Full template modified for MDFC
-    """
-    template_file_name = "WarpDandy/full-mdfc-front"
-    dfc_layer_group = con.layers.MDFC_FRONT
-    template_suffix = "Full"
 
 
 """
