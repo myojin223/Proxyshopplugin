@@ -9,9 +9,9 @@ import proxyshop.frame_logic as frame_logic
 import proxyshop.format_text as format_text
 import proxyshop.text_layers as text_classes
 import proxyshop.templates as temp
-import proxyshop.constants as con
-import proxyshop.settings as cfg
 import proxyshop.helpers as psd
+from proxyshop.constants import con
+from proxyshop.settings import cfg
 
 from photoshop.api._artlayer import ArtLayer
 import photoshop.api as ps
@@ -34,7 +34,18 @@ class FullartTrixTemplate (temp.NormalTemplate):
     def is_companion(self) -> bool:
         return False
 
- 
+    def create_expansion_symbol(self, centered=False):
+        # Skip if common
+        if self.layout.rarity == con.rarity_common:
+            return
+
+        # Only add the rarity overlay
+        rarity = self.layout.rarity
+        if self.layout.rarity in (con.rarity_bonus, con.rarity_special):
+            rarity = con.rarity_mythic
+        psd.getLayer(rarity.lower(), self.text_layers).visible = True
+
+
 class LegendsTemplate (temp.NormalClassicTemplate):
     """
      * Created by WarpDandy
@@ -148,6 +159,14 @@ class MirrorTemplate (temp.NormalTemplate):
                 flip_scale=True
             )
         ])
+
+    @property
+    def expansion_symbol_anchor(self) -> ps.AnchorPosition:
+        return ps.AnchorPosition.MiddleLeft
+
+    def load_artwork(self):
+        super().load_artwork()
+        self.active_layer.resize(-100, 100, ps.AnchorPosition.MiddleCenter)
          
  
 class ClassicWhiteBorderTemplate (temp.NormalClassicTemplate):
@@ -165,9 +184,11 @@ class NicknameSmallTemplate (temp.NormalTemplate):
     template_file_name = "WarpDandy/NicknameSmall"
     template_suffix = "Nickname S"
 
-    def __int__(self, layout):
+    def __init__(self, layout):
         cfg.exit_early = True
-        super().__int__(layout)
+        cfg.remove_reminder = True
+        cfg.remove_flavor = True
+        super().__init__(layout)
 
     @property
     def is_nyx(self) -> bool:
@@ -183,7 +204,7 @@ class NicknameSmallTemplate (temp.NormalTemplate):
 
     @cached_property
     def art_reference_layer(self) -> Optional[ArtLayer]:
-        return psd.getLayer(con.layers['ART_FRAME'])
+        return psd.getLayer(con.layers.ART_FRAME)
 
     def load_artwork(self):
         super().load_artwork()
@@ -199,9 +220,10 @@ class NicknameMediumTemplate (temp.NormalTemplate):
     template_file_name = "WarpDandy/NicknameMedium"
     template_suffix = "Nickname M"
 
-    def __int__(self, layout):
+    def __init__(self, layout):
         cfg.exit_early = True
-        super().__int__(layout)
+        cfg.remove_reminder = True
+        super().__init__(layout)
 
     @property
     def is_nyx(self) -> bool:
@@ -221,7 +243,7 @@ class NicknameMediumTemplate (temp.NormalTemplate):
 
     @cached_property
     def art_reference_layer(self) -> Optional[ArtLayer]:
-        return psd.getLayer(con.layers['ART_FRAME'])
+        return psd.getLayer(con.layers.ART_FRAME)
 
     def load_artwork(self):
         super().load_artwork()
@@ -236,6 +258,11 @@ class GoldenAgeTemplate (temp.NormalFullartTemplate):
     """
     template_file_name = "WarpDandy/GoldenAge"
     template_suffix = "Golden Age"
+
+    def __init__(self, layout):
+        cfg.remove_flavor = True
+        cfg.remove_reminder = True
+        super().__init__(layout)
 
     @property
     def is_nyx(self) -> bool:
@@ -260,6 +287,11 @@ class GoldenAge2Template (temp.NormalTemplate):
     """
     template_file_name = "WarpDandy/GoldenAge2"
     template_suffix = "Golden Age 2"
+
+    def __init__(self, layout):
+        cfg.remove_flavor = True
+        cfg.remove_reminder = True
+        super().__init__(layout)
 
     @property
     def is_nyx(self) -> bool:
@@ -332,6 +364,11 @@ class GoldenAgeV2Template (temp.NormalTemplate):
     """
     template_file_name = "WarpDandy/GoldenAgeV2"
     template_suffix = "Golden Age V2"
+
+    def __init__(self, layout):
+        cfg.remove_flavor = True
+        cfg.remove_reminder = True
+        super().__init__(layout)
 
     @property
     def is_nyx(self) -> bool:
@@ -408,12 +445,13 @@ class ClassicBorderlessShortTemplate (temp.NormalTemplate):
     def __init__(self, layout):
         # strip out reminder text for extended cards
         cfg.remove_reminder = True
+        cfg.remove_flavor = True
         super().__init__(layout)
 
     @cached_property
     def art_reference_layer(self) -> Optional[ArtLayer]:
         # Set art frame
-        return psd.getLayer(con.layers['ART_FRAME'])
+        return psd.getLayer(con.layers.ART_FRAME)
 
     def load_artwork(self):
         # Content aware fill
@@ -494,6 +532,12 @@ class PinlinesExtNeonTemplate (temp.NormalTemplate):
     template_file_name = "WarpDandy/PinlinesExtNeon"
     template_suffix = "Neon Extended"
 
+    def __init__(self, layout):
+        # Strip extra text for small text box
+        cfg.remove_flavor = True
+        cfg.remove_reminder = True
+        super().__init__(layout)
+
     @property
     def is_nyx(self) -> bool:
         return False
@@ -564,6 +608,11 @@ class FangExtendedTemplate (temp.NormalTemplate):
     def is_companion(self) -> bool:
         return False
 
+    def load_artwork(self):
+        # Content aware fill
+        super().load_artwork()
+        psd.content_fill_empty_area(self.art_layer)
+
 
 class GoldenAgeFullArtTemplate (temp.NormalTemplate):
     """
@@ -571,6 +620,11 @@ class GoldenAgeFullArtTemplate (temp.NormalTemplate):
     """
     template_file_name = "WarpDandy/GoldenAgeFullArt"
     template_suffix = "Golden Age Full Art"
+
+    def __init__(self, layout):
+        cfg.remove_flavor = True
+        cfg.remove_reminder = True
+        super().__init__(layout)
 
     @property
     def is_nyx(self) -> bool:
@@ -602,7 +656,7 @@ class SilvanMDFCBackTemplate (temp.MDFCBackTemplate):
     Silvan Full template modified for MDFC
     """
     template_file_name = "WarpDandy/full-mdfc-back"
-    dfc_layer_group = con.layers['MDFC_BACK']
+    dfc_layer_group = con.layers.MDFC_BACK
     template_suffix = "Full"
 
     def __init__(self, layout):
@@ -621,7 +675,7 @@ class SilvanMDFCFrontTemplate (SilvanMDFCBackTemplate):
     Silvan Full template modified for MDFC
     """
     template_file_name = "WarpDandy/full-mdfc-front"
-    dfc_layer_group = con.layers['MDFC_FRONT']
+    dfc_layer_group = con.layers.MDFC_FRONT
     template_suffix = "Full"
 
 
