@@ -1,10 +1,9 @@
 {
 	"normal": {
-		"FullartTrix": "FullartTrixTemplate",
 		"Samurai": "SamuraiTemplate",
 		"Ninja": "NinjaTemplate",
 		"Ninja Glitch": "NinjaGlitchTemplate",
-		"Mirrored": "MirroredTemplate",
+		"Mirror": "MirrorTemplate",
 		"Classic White Border": "ClassicWhiteBorderTemplate",
 		"Nickname Small": "NicknameSmallTemplate",
 		"Nickname Medium": "NicknameMediumTemplate",

@@ -1,9 +1,5 @@
 {
 	"Normal": {
-		"FullartTrix": {
-			"file": "FullartTrix.psd",
-			"id": "1ReGJeZucjwbPjsXmqAEP3zB_clHDO6-l"
-		},
 		"Samurai": {
 			"file": "Samurai.psd",
 			"id": "1L63KAFo4-R3Pj8WfBiQ6Dho5J-aJtrp2"
@@ -16,8 +12,8 @@
 			"file": "NinjaGlitch.psd",
 			"id": "1xEXBYkwa2JGRn9Zwm18T7smuhMi3DFXV"
 		},
-		"Mirrored": {
-			"file": "Mirrored.psd",
+		"Mirror": {
+			"file": "Mirror.psd",
 			"id": "1lVqMF3weDuZ_QIHtyjT5One21wliZXNG"
 		},
 		"Classic White Border": {

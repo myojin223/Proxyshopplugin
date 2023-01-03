@@ -18,34 +18,6 @@ import photoshop.api as ps
 app = ps.Application()
 
 
-class FullartTrixTemplate (temp.NormalTemplate):
-    """
-     * Port of TrixAreForScoot Proximity Template
-     * Created by WarpDandy & TrixAreForScoot
-    """
-    template_file_name = "WarpDandy/FullartTrix"
-    template_suffix = "FullartTrix"
-
-    @property
-    def is_nyx(self) -> bool:
-        return False
-
-    @property
-    def is_companion(self) -> bool:
-        return False
-
-    def create_expansion_symbol(self, centered=False):
-        # Skip if common
-        if self.layout.rarity == con.rarity_common:
-            return
-
-        # Only add the rarity overlay
-        rarity = self.layout.rarity
-        if self.layout.rarity in (con.rarity_bonus, con.rarity_special):
-            rarity = con.rarity_mythic
-        psd.getLayer(rarity.lower(), self.text_layers).visible = True
-
-
 class SamuraiTemplate (temp.NormalTemplate):
     """
      * Created by WarpDandy
@@ -124,12 +96,12 @@ class NinjaGlitchTemplate (temp.NormalTemplate):
         psd.content_fill_empty_area(self.art_layer)
 
 
-class MirroredTemplate (temp.NormalTemplate):
+class MirrorTemplate (temp.NormalTemplate):
     """
      * Created by WarpDandy
     """
-    template_file_name = "WarpDandy/Mirrored"
-    template_suffix = "Mirrored"
+    template_file_name = "WarpDandy/Mirror"
+    template_suffix = "Mirror"
 
     def basic_text_layers(self):
         # Flip scaling on text layers
@@ -242,6 +214,35 @@ class NicknameMediumTemplate (temp.NormalTemplate):
 
         # Content aware fill for extended art
         psd.content_fill_empty_area(self.art_layer)
+
+
+class GoldenAgeTemplate (temp.NormalFullartTemplate):
+    """
+     * Created by WarpDandy
+    """
+    template_file_name = "WarpDandy/GoldenAge"
+    template_suffix = "Golden Age"
+
+    def __init__(self, layout):
+        cfg.remove_flavor = True
+        cfg.remove_reminder = True
+        super().__init__(layout)
+
+    @property
+    def is_nyx(self) -> bool:
+        return False
+
+    @property
+    def is_companion(self) -> bool:
+        return False
+
+    @property
+    def background_layer(self) -> Optional[ArtLayer]:
+        return
+
+    @property
+    def twins_layer(self) -> Optional[ArtLayer]:
+        return
 
 
 class GoldenAge2Template (temp.NormalTemplate):
