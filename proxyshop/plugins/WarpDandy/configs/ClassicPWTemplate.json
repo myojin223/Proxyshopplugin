@@ -1,0 +1,11 @@
+[
+  {
+    "type": "options",
+    "title": "[b]Ability Dividers[/b]",
+    "desc": "Choose between modern, classic, or no ability divider.\n[b](Default: Advanced Sketch)[/b]",
+    "section": "TEXT",
+    "key": "Ability.Divider",
+    "options": ["Modern", "Classic", "None"],
+    "default": "Modern"
+  }
+]
