@@ -139,6 +139,14 @@ class ClassicWhiteBorderTemplate (temp.NormalClassicTemplate):
     """
     template_file_name = "WarpDandy/ClassicWhiteBorder"
     template_suffix = "Classic WB"
+    
+
+class ClassicGoldBorderTemplate (temp.NormalClassicTemplate):
+    """
+     * Created by WarpDandy
+    """
+    template_file_name = "WarpDandy/ClassicGoldBorder"
+    template_suffix = "Classic GB"
 
 
 class NicknameSmallTemplate (temp.NormalTemplate):
@@ -181,6 +189,44 @@ class NicknameMediumTemplate (temp.NormalTemplate):
     """
     template_file_name = "WarpDandy/NicknameMedium"
     template_suffix = "Nickname M"
+
+    def __init__(self, layout):
+        cfg.exit_early = True
+        super().__init__(layout)
+
+    @property
+    def is_nyx(self) -> bool:
+        return False
+    
+    @property
+    def is_companion(self) -> bool:
+        return False
+    
+    @property
+    def background_layer(self) -> Optional[ArtLayer]:
+        return
+
+    @property
+    def twins_layer(self) -> Optional[ArtLayer]:
+        return
+
+    @cached_property
+    def art_reference_layer(self) -> Optional[ArtLayer]:
+        return psd.getLayer(con.layers.ART_FRAME)
+
+    def load_artwork(self):
+        super().load_artwork()
+
+        # Content aware fill for extended art
+        psd.content_fill_empty_area(self.art_layer)
+
+
+class NoBorderTemplate (temp.NormalTemplate):
+    """
+     A simple template without a border
+    """
+    template_file_name = "WarpDandy/NoBorder"
+    template_suffix = "NB"
 
     def __init__(self, layout):
         cfg.exit_early = True
