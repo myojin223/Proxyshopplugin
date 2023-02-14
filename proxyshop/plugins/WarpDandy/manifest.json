@@ -12,7 +12,7 @@
 			"file": "NinjaGlitch.psd",
 			"id": "1xEXBYkwa2JGRn9Zwm18T7smuhMi3DFXV"
 		},
-		"Mirror": {
+		"Mirrored": {
 			"file": "Mirror.psd",
 			"id": "1lVqMF3weDuZ_QIHtyjT5One21wliZXNG"
 		},
@@ -28,8 +28,8 @@
 			"file": "NicknameMedium.psd",
 			"id": "1IDsfmNG0dmhJLqc_zZar-aQC3JuRHgRE"
 		},
-		"Golden Age 2": {
-			"file": "GoldenAge2.psd",
+		"Golden Age": {
+			"file": "GoldenAge.psd",
 			"id": "1iwUKo3jYY0v7sYjNjDJ9AZQbsLau_rRy"
 		},
 		"Original Expedition": {
@@ -75,6 +75,14 @@
 		"Golden Age Full Art": {
 			"file": "GoldenAgeFullArt.psd",
 			"id": "1oMVrIkgn2MpFse9fCrts_F-ZOyq0m-Wz"
+		} ,
+		"Classic Gold Border": {
+			"file": "ClassicGoldBorder.psd",
+			"id": ""
+		},
+		"No Border": {
+			"file": "NoBorder.psd",
+			"id": ""
 		}
 	},
 	"Planeswalker": {
