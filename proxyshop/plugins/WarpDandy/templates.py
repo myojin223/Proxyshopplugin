@@ -220,6 +220,80 @@ class NicknameMediumTemplate (temp.NormalTemplate):
         # Content aware fill for extended art
         psd.content_fill_empty_area(self.art_layer)
 
+class NicknameLargeTemplate (temp.NormalTemplate):
+    """
+     * Requires manually adding the nickname
+    """
+    template_file_name = "WarpDandy/NicknameLarge"
+    template_suffix = "Nickname L"
+
+    def __init__(self, layout):
+        cfg.exit_early = True
+        super().__init__(layout)
+
+    @property
+    def is_nyx(self) -> bool:
+        return False
+    
+    @property
+    def is_companion(self) -> bool:
+        return False
+    
+    @property
+    def background_layer(self) -> Optional[ArtLayer]:
+        return
+
+    @property
+    def twins_layer(self) -> Optional[ArtLayer]:
+        return
+
+    @cached_property
+    def art_reference_layer(self) -> Optional[ArtLayer]:
+        return psd.getLayer(con.layers.ART_FRAME)
+
+    def load_artwork(self):
+        super().load_artwork()
+
+        # Content aware fill for extended art
+        psd.content_fill_empty_area(self.art_layer)
+
+class NicknameBaseTemplate (temp.NormalTemplate):
+    """
+     * Requires manually adding the nickname
+    """
+    template_file_name = "WarpDandy/NicknameBase"
+    template_suffix = "Nickname"
+
+    def __init__(self, layout):
+        cfg.exit_early = True
+        super().__init__(layout)
+
+    @property
+    def is_nyx(self) -> bool:
+        return False
+    
+    @property
+    def is_companion(self) -> bool:
+        return False
+    
+    @property
+    def background_layer(self) -> Optional[ArtLayer]:
+        return
+
+    @property
+    def twins_layer(self) -> Optional[ArtLayer]:
+        return
+
+    @cached_property
+    def art_reference_layer(self) -> Optional[ArtLayer]:
+        return psd.getLayer(con.layers.ART_FRAME)
+
+    def load_artwork(self):
+        super().load_artwork()
+
+        # Content aware fill for extended art
+        psd.content_fill_empty_area(self.art_layer)
+
 
 class NoBorderTemplate (temp.NormalTemplate):
     """
@@ -229,7 +303,7 @@ class NoBorderTemplate (temp.NormalTemplate):
     template_suffix = "NB"
 
     def __init__(self, layout):
-        cfg.exit_early = True
+        cfg.exit_early = False
         super().__init__(layout)
 
     @property

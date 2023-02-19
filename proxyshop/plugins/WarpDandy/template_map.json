@@ -7,6 +7,8 @@
 		"Classic White Border": "ClassicWhiteBorderTemplate",
 		"Nickname Small": "NicknameSmallTemplate",
 		"Nickname Medium": "NicknameMediumTemplate",
+		"Nickname Large": "NicknameLargeTemplate",
+		"Nickname": "NicknameBaseTemplate",
 		"Golden Age": "GoldenAgeTemplate",
 		"Original Expedition": "zneExpeditionTemplate",
 		"Skyscraper": "SkyscraperTemplate",
