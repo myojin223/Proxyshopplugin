@@ -1,0 +1,94 @@
+{
+	"Normal": {
+		"Samurai": {
+			"file": "Samurai.psd",
+			"id": "1L63KAFo4-R3Pj8WfBiQ6Dho5J-aJtrp2"
+		},
+		"Ninja": {
+			"file": "Ninja.psd",
+			"id": "1GxLkUQm2f5Acd85jIS10A7J4pqYSSPOK"
+		},
+		"Ninja Glitch": {
+			"file": "NinjaGlitch.psd",
+			"id": "1xEXBYkwa2JGRn9Zwm18T7smuhMi3DFXV"
+		},
+		"Mirrored": {
+			"file": "Mirror.psd",
+			"id": "1lVqMF3weDuZ_QIHtyjT5One21wliZXNG"
+		},
+		"Nickname Small": {
+			"file": "NicknameSmall.psd",
+			"id": "1EpRI370UB7nfceDfQ3mY1Dwm0Y1dbTTn"
+		},
+		"Nickname Medium": {
+			"file": "NicknameMedium.psd",
+			"id": "1IDsfmNG0dmhJLqc_zZar-aQC3JuRHgRE"
+		},
+		"Nickname Large": {
+			"file": "NicknameLarge.psd",
+			"id": "1pyFniUQkAveV_4p-2FK9rB7NOZJJGDJT"
+		},
+		"Nickname": {
+			"file": "NicknameBase.psd",
+			"id": "1XC_wCiWOzjLmUvV1baFzxm5OVwZ_Y6Ca"
+		},
+		"Golden Age": {
+			"file": "GoldenAge.psd",
+			"id": "1iwUKo3jYY0v7sYjNjDJ9AZQbsLau_rRy"
+		},
+		"Original Expedition": {
+			"file": "zneExpedition.psd",
+			"id": "1JyjFRYgvEFnJ7_gVTX9YUsE9BYrgPeXb"
+		},
+		"Skyscraper": {
+			"file": "Skyscraper.psd",
+			"id": "1f9rTbXoeNNYGUiNMTY64ZxhbrV0kfPSS"
+		},
+		"Golden Age V2": {
+			"file": "GoldenAgeV2.psd",
+			"id": "1UTV-hMDqpXaSmq6WObjW_Fkg6IY5Srjv"
+		},
+		"Art Deco": {
+			"file": "ArtDeco.psd",
+			"id": "1MSnqGrvbeevUSpaI9-Xy1l3fuh_Rf4oA"
+		},
+		"Etched": {
+			"file": "Etched.psd",
+			"id": "1pjJONx6KNV9GAh9PSXbjcmi1oCrKKU94"
+		},
+		"Destiny": {
+			"file": "Destiny.psd",
+			"id": "1PNFrX2g74_b1LbdbOxZZd3IIo9SE0NAm"
+		},
+		"Neon Extended": {
+			"file": "PinlinesExtNeon.psd",
+			"id": "1iFWhyp7x1s35Wh3ykBv8MLrZ-fqFj427"
+		},
+		"Mystical Archive": {
+			"file": "MysticalArchive.psd",
+			"id": "1KpDKnP21GA4rP5_iGoWhcTJC2cN7cVh6"
+		},
+		"Fang Extended": {
+			"file": "FangExtended.psd",
+			"id": "1_HArLOeOIWIl5dNrujkHTwpqVh-hcS3O"
+		},
+		"Golden Age Full Art": {
+			"file": "GoldenAgeFullArt.psd",
+			"id": "1oMVrIkgn2MpFse9fCrts_F-ZOyq0m-Wz"
+		} ,
+		"No Border": {
+			"file": "NoBorder.psd",
+			"id": ""
+		}
+	},
+	"Planeswalker": {
+		"Classic PW": {
+			"file": "ClassicPW.psd",
+			"id": "1w2qpg-YR8Rd_qwswQ0WILSGaLlvCTdhe"
+		},
+		"Art Deco PW": {
+			"file": "ArtDecoPW.psd",
+			"id": "1UerUkwOZJBitvHgZFG9CgoUUnQA4H28-"
+		}
+	}
+}
