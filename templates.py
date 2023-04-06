@@ -25,7 +25,6 @@ class SamuraiTemplate (temp.NormalTemplate):
     """
      * Created by WarpDandy
     """
-    template_file_name = "Samurai"
     template_suffix = "Samurai"
 
     @property
@@ -49,7 +48,6 @@ class NinjaTemplate (temp.NormalTemplate):
     """
      * Created by WarpDandy
     """
-    template_file_name = "Ninja"
     template_suffix = "Ninja"
 
     @property
@@ -73,7 +71,6 @@ class NinjaGlitchTemplate (temp.NormalTemplate):
     """
      * Created by WarpDandy
     """
-    template_file_name = "NinjaGlitch"
     template_suffix = "Glitch Ninja"
 
     @property
@@ -103,7 +100,6 @@ class MirroredTemplate (temp.NormalTemplate):
     """
      * Created by WarpDandy
     """
-    template_file_name = "Mirror"
     template_suffix = "Mirrored"
 
     def basic_text_layers(self):
@@ -140,7 +136,6 @@ class NicknameSmallTemplate (temp.NormalTemplate):
     """
      * Requires manually adding the nickname
     """
-    template_file_name = "NicknameSmall"
     template_suffix = "Nickname S"
 
     def __init__(self, layout):
@@ -174,7 +169,6 @@ class NicknameMediumTemplate (temp.NormalTemplate):
     """
      * Requires manually adding the nickname
     """
-    template_file_name = "NicknameMedium"
     template_suffix = "Nickname M"
 
     def __init__(self, layout):
@@ -212,7 +206,6 @@ class NicknameLargeTemplate (temp.NormalTemplate):
     """
      * Requires manually adding the nickname
     """
-    template_file_name = "NicknameLarge"
     template_suffix = "Nickname L"
 
     def __init__(self, layout):
@@ -250,7 +243,6 @@ class NicknameBaseTemplate (temp.NormalTemplate):
     """
      * Requires manually adding the nickname
     """
-    template_file_name = "NicknameBase"
     template_suffix = "Nickname"
 
     def __init__(self, layout):
@@ -288,7 +280,6 @@ class NoBorderTemplate (temp.NormalTemplate):
     """
      A simple template without a border
     """
-    template_file_name = "NoBorder"
     template_suffix = "NB"
 
     def __init__(self, layout):
@@ -326,7 +317,6 @@ class GoldenAgeTemplate (temp.NormalTemplate):
     """
      * Created by WarpDandy
     """
-    template_file_name = "GoldenAge"
     template_suffix = "Golden Age"
 
     @property
@@ -350,7 +340,6 @@ class zneExpeditionTemplate (temp.NormalTemplate):
     """
      * Created by WarpDandy
     """
-    template_file_name = "zneExpedition"
     template_suffix = "Original Expedition"
 
     @property
@@ -374,7 +363,6 @@ class SkyscraperTemplate (temp.NormalTemplate):
     """
      * Created by WarpDandy
     """
-    template_file_name = "Skyscraper"
     template_suffix = "Skyscraper"
 
     @property
@@ -398,7 +386,6 @@ class GoldenAgeV2Template (temp.NormalTemplate):
     """
      * Created by MrOppsokopolis
     """
-    template_file_name = "GoldenAgeV2"
     template_suffix = "Golden Age V2"
 
     @property
@@ -422,7 +409,6 @@ class ArtDecoTemplate (temp.NormalTemplate):
     """
      * Created by WarpDandy
     """
-    template_file_name = "ArtDeco"
     template_suffix = "Art Deco"
 
     @property
@@ -446,7 +432,6 @@ class EtchedTemplate (temp.NormalTemplate):
     """
      * Created by WarpDandy
     """
-    template_file_name = "Etched"
     template_suffix = "Etched"
 
     @property
@@ -470,7 +455,6 @@ class DestinyTemplate (temp.NormalTemplate):
     """
      * Created by Meeple, ported to Proxyshop by WarpDandy
     """
-    template_file_name = "Destiny"
     template_suffix = "Destiny"
 
     @property
@@ -494,7 +478,6 @@ class PinlinesExtNeonTemplate (temp.NormalTemplate):
     """
      * Created by WarpDandy
     """
-    template_file_name = "PinlinesExtNeon"
     template_suffix = "Neon Extended"
 
     @property
@@ -527,7 +510,6 @@ class MysticalArchiveTemplate (temp.NormalTemplate):
     """
      * Created by WarpDandy
     """
-    template_file_name = "MysticalArchive"
     template_suffix = "Mystical Archive"
 
     @property
@@ -556,7 +538,6 @@ class FangExtendedTemplate (temp.NormalTemplate):
     """
      * Created by WarpDandy
     """
-    template_file_name = "FangExtended"
     template_suffix = "Fang Extended"
 
     @property
@@ -577,7 +558,6 @@ class GoldenAgeFullArtTemplate (temp.NormalTemplate):
     """
      * Created by WarpDandy
     """
-    template_file_name = "GoldenAgeFullArt"
     template_suffix = "Golden Age Full Art"
 
     @property
@@ -606,7 +586,6 @@ class ClassicPWTemplate (temp.PlaneswalkerTemplate):
     """
      * Planeswalker template - 3 or 4 loyalty abilities.
     """
-    template_file_name = "ClassicPW"
     template_suffix = "Classic PW"
 
     def __init__(self, layout):
@@ -717,5 +696,4 @@ class ArtDecoPWTemplate (temp.PlaneswalkerTemplate):
     """
      * Planeswalker template - 3 or 4 loyalty abilities.
     """
-    template_file_name = "ArtDecoPW"
-    template_suffix = "Art Deco PW"
+    template_suffix = "Art Deco"
