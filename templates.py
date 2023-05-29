@@ -1,39 +1,48 @@
 """
 WARPDANDY TEMPLATES
 """
+# Standard Library Imports
 from functools import cached_property
 from typing import Optional
 
+# Third Party Imports
 from photoshop.api._layerSet import LayerSet
-
-import src.format_text as ft
-import src.text_layers as text_classes
-import src.templates as temp
-import src.helpers as psd
-from src.constants import con
-from src.settings import cfg
-
 from photoshop.api._artlayer import ArtLayer
 import photoshop.api as ps
 
-from src.utils.enums_photoshop import Alignment
+# Local Imports
+from src.templates import (
+    NormalTemplate,
+    ExtendedTemplate,
+    BorderlessTemplate,
+    PlaneswalkerTemplate
+)
+import src.format_text as ft
+import src.text_layers as text_classes
+import src.helpers as psd
+from src.settings import cfg
+from src.enums.photoshop import Alignment
+from src.enums.layers import LAYERS
 
-app = ps.Application()
 
-
-class SamuraiTemplate (temp.NormalTemplate):
+class SamuraiTemplate (NormalTemplate):
     """
-     * Created by WarpDandy
+     * Created by WarpDandy.
+     * Samurai frame introduced in Kamigawa Neon Dynasty.
     """
     template_suffix = "Samurai"
 
-    @property
-    def is_nyx(self) -> bool:
-        return False
+    """
+    TOGGLE
+    """
 
     @property
-    def is_companion(self) -> bool:
+    def is_land(self) -> bool:
         return False
+
+    """
+    LAYERS
+    """
 
     @property
     def background_layer(self) -> Optional[ArtLayer]:
@@ -42,21 +51,22 @@ class SamuraiTemplate (temp.NormalTemplate):
     @property
     def twins_layer(self) -> Optional[ArtLayer]:
         return
-        
 
-class NinjaTemplate (temp.NormalTemplate):
+    def enable_crown(self) -> None:
+        # No separate border, no hollow, enable pinlines mask
+        self.crown_layer.visible = True
+
+
+class NinjaTemplate (NormalTemplate):
     """
-     * Created by WarpDandy
+     * Created by WarpDandy.
+     * Ninja frame introduced in Kamigawa Neon Dynasty.
     """
     template_suffix = "Ninja"
 
-    @property
-    def is_nyx(self) -> bool:
-        return False
-
-    @property
-    def is_companion(self) -> bool:
-        return False
+    """
+    LAYERS
+    """
 
     @property
     def background_layer(self) -> Optional[ArtLayer]:
@@ -65,21 +75,26 @@ class NinjaTemplate (temp.NormalTemplate):
     @property
     def twins_layer(self) -> Optional[ArtLayer]:
         return
- 
- 
-class NinjaGlitchTemplate (temp.NormalTemplate):
+
     """
-     * Created by WarpDandy
+    METHODS
+    """
+
+    def enable_crown(self) -> None:
+        # No separate border, no hollow, enable pinlines mask
+        self.crown_layer.visible = True
+
+ 
+class NinjaGlitchTemplate (ExtendedTemplate):
+    """
+     * Created by WarpDandy.
+     * Glitch version of the Ninja extended frame introduced in Kamigawa Neon Dynasty.
     """
     template_suffix = "Glitch Ninja"
 
-    @property
-    def is_nyx(self) -> bool:
-        return False
-
-    @property
-    def is_companion(self) -> bool:
-        return False
+    """
+    LAYERS
+    """
 
     @property
     def background_layer(self) -> Optional[ArtLayer]:
@@ -89,18 +104,38 @@ class NinjaGlitchTemplate (temp.NormalTemplate):
     def twins_layer(self) -> Optional[ArtLayer]:
         return
 
-    def load_artwork(self):
-        super().load_artwork()
-
-        # Content aware fill for extended art
-        psd.content_fill_empty_area(self.art_layer)
-
-
-class MirroredTemplate (temp.NormalTemplate):
     """
-     * Created by WarpDandy
+    METHODS
+    """
+
+    def enable_crown(self) -> None:
+        # No separate border, no hollow, enable pinlines mask
+        self.crown_layer.visible = True
+
+
+class MirroredTemplate (NormalTemplate):
+    """
+     * Created by WarpDandy.
+     * Mirrored frame introduced in the April Fool's Secret Lair reveal.
     """
     template_suffix = "Mirrored"
+
+    """
+    PROPERTIES
+    """
+
+    @cached_property
+    def expansion_symbol_alignments(self) -> list[Alignment]:
+        return [Alignment.CenterVertical, Alignment.Left]
+
+    """
+    METHODS
+    """
+
+    def load_artwork(self):
+        # Flip artwork
+        super().load_artwork()
+        self.active_layer.resize(-100, 100, ps.AnchorPosition.MiddleCenter)
 
     def basic_text_layers(self):
         # Flip scaling on text layers
@@ -123,125 +158,12 @@ class MirroredTemplate (temp.NormalTemplate):
             )
         ])
 
-    @cached_property
-    def expansion_symbol_alignments(self) -> list[Alignment]:
-        return [Alignment.CenterVertical, Alignment.Left]
 
-    def load_artwork(self):
-        super().load_artwork()
-        self.active_layer.resize(-100, 100, ps.AnchorPosition.MiddleCenter)
-
-
-class NicknameSmallTemplate (temp.NormalTemplate):
+class NicknameBaseTemplate (BorderlessTemplate):
     """
-     * Requires manually adding the nickname
-    """
-    template_suffix = "Nickname S"
-
-    def __init__(self, layout):
-        cfg.exit_early = True
-        super().__init__(layout)
-
-    @property
-    def is_nyx(self) -> bool:
-        return False
-
-    @property
-    def is_companion(self) -> bool:
-        return False
-
-    @property
-    def background_layer(self) -> Optional[ArtLayer]:
-        return
-
-    @cached_property
-    def art_reference_layer(self) -> Optional[ArtLayer]:
-        return psd.getLayer(con.layers.ART_FRAME)
-
-    def load_artwork(self):
-        super().load_artwork()
-
-        # Content aware fill for extended art
-        psd.content_fill_empty_area(self.art_layer)
-           
-
-class NicknameMediumTemplate (temp.NormalTemplate):
-    """
-     * Requires manually adding the nickname
-    """
-    template_suffix = "Nickname M"
-
-    def __init__(self, layout):
-        cfg.exit_early = True
-        super().__init__(layout)
-
-    @property
-    def is_nyx(self) -> bool:
-        return False
-    
-    @property
-    def is_companion(self) -> bool:
-        return False
-    
-    @property
-    def background_layer(self) -> Optional[ArtLayer]:
-        return
-
-    @property
-    def twins_layer(self) -> Optional[ArtLayer]:
-        return
-
-    @cached_property
-    def art_reference_layer(self) -> Optional[ArtLayer]:
-        return psd.getLayer(con.layers.ART_FRAME)
-
-    def load_artwork(self):
-        super().load_artwork()
-
-        # Content aware fill for extended art
-        psd.content_fill_empty_area(self.art_layer)
-
-
-class NicknameLargeTemplate (temp.NormalTemplate):
-    """
-     * Requires manually adding the nickname
-    """
-    template_suffix = "Nickname L"
-
-    def __init__(self, layout):
-        cfg.exit_early = True
-        super().__init__(layout)
-
-    @property
-    def is_nyx(self) -> bool:
-        return False
-    
-    @property
-    def is_companion(self) -> bool:
-        return False
-    
-    @property
-    def background_layer(self) -> Optional[ArtLayer]:
-        return
-
-    @property
-    def twins_layer(self) -> Optional[ArtLayer]:
-        return
-
-    @cached_property
-    def art_reference_layer(self) -> Optional[ArtLayer]:
-        return psd.getLayer(con.layers.ART_FRAME)
-
-    def load_artwork(self):
-        super().load_artwork()
-
-        # Content aware fill for extended art
-        psd.content_fill_empty_area(self.art_layer)
-
-
-class NicknameBaseTemplate (temp.NormalTemplate):
-    """
-     * Requires manually adding the nickname
+     * Created by WarpDandy.
+     * Fullart Nickname template introduced in the Ikoria: Lair of Behemoths Godzilla promos.
+     * Must enter Nickname text manually.
     """
     template_suffix = "Nickname"
 
@@ -249,36 +171,55 @@ class NicknameBaseTemplate (temp.NormalTemplate):
         cfg.exit_early = True
         super().__init__(layout)
 
+    """
+    TOGGLE
+    """
+
     @property
-    def is_nyx(self) -> bool:
+    def is_land(self) -> bool:
         return False
-    
-    @property
-    def is_companion(self) -> bool:
-        return False
-    
-    @property
-    def background_layer(self) -> Optional[ArtLayer]:
-        return
+
+    """
+    LAYERS
+    """
 
     @property
     def twins_layer(self) -> Optional[ArtLayer]:
         return
 
-    @cached_property
-    def art_reference_layer(self) -> Optional[ArtLayer]:
-        return psd.getLayer(con.layers.ART_FRAME)
-
-    def load_artwork(self):
-        super().load_artwork()
-
-        # Content aware fill for extended art
-        psd.content_fill_empty_area(self.art_layer)
+    def enable_crown(self) -> None:
+        # No separate border, no hollow, enable pinlines mask
+        self.crown_layer.visible = True
 
 
-class NoBorderTemplate (temp.NormalTemplate):
+class NicknameSmallTemplate(NicknameBaseTemplate):
     """
-     A simple template without a border
+     * Created by WarpDandy.
+     * Nickname template with small textbox.
+    """
+    template_suffix = "Nickname Small"
+
+
+class NicknameMediumTemplate(NicknameBaseTemplate):
+    """
+     * Created by WarpDandy.
+     * Nickname template with medium textbox.
+    """
+    template_suffix = "Nickname Medium"
+
+
+class NicknameLargeTemplate(NicknameBaseTemplate):
+    """
+     * Created by WarpDandy.
+     * Nickname template with large textbox.
+    """
+    template_suffix = "Nickname Large"
+
+
+class NoBorderTemplate (ExtendedTemplate):
+    """
+     * Created by WarpDandy.
+     * A simple template without a border.
     """
     template_suffix = "NB"
 
@@ -286,6 +227,10 @@ class NoBorderTemplate (temp.NormalTemplate):
         cfg.exit_early = False
         super().__init__(layout)
 
+    """
+    TOGGLE
+    """
+
     @property
     def is_nyx(self) -> bool:
         return False
@@ -293,7 +238,11 @@ class NoBorderTemplate (temp.NormalTemplate):
     @property
     def is_companion(self) -> bool:
         return False
-    
+
+    """
+    LAYERS
+    """
+
     @property
     def background_layer(self) -> Optional[ArtLayer]:
         return
@@ -303,29 +252,32 @@ class NoBorderTemplate (temp.NormalTemplate):
         return
 
     @cached_property
-    def art_reference_layer(self) -> Optional[ArtLayer]:
-        return psd.getLayer(con.layers.ART_FRAME)
-
-    def load_artwork(self):
-        super().load_artwork()
-
-        # Content aware fill for extended art
-        psd.content_fill_empty_area(self.art_layer)
+    def art_reference(self) -> Optional[ArtLayer]:
+        return psd.getLayer(LAYERS.ART_FRAME)
 
 
-class GoldenAgeTemplate (temp.NormalTemplate):
+class GoldenAgeTemplate (NormalTemplate):
     """
      * Created by WarpDandy
+     * Golden Age template introduced in Streets of New Capenna.
     """
     template_suffix = "Golden Age"
 
+    """
+    TOGGLE
+    """
+
+    @property
+    def is_land(self) -> bool:
+        return False
+
     @property
     def is_nyx(self) -> bool:
         return False
 
-    @property
-    def is_companion(self) -> bool:
-        return False
+    """
+    LAYERS
+    """
 
     @property
     def background_layer(self) -> Optional[ArtLayer]:
@@ -335,66 +287,79 @@ class GoldenAgeTemplate (temp.NormalTemplate):
     def twins_layer(self) -> Optional[ArtLayer]:
         return
 
+    @cached_property
+    def pt_layer(self) -> Optional[ArtLayer]:
+        # Not separated by color
+        return psd.getLayerSet(LAYERS.PT_BOX)
 
-class zneExpeditionTemplate (temp.NormalTemplate):
+    @cached_property
+    def divider_layer(self) -> Optional[ArtLayer]:
+        # Divider is a group
+        return psd.getLayerSet(LAYERS.DIVIDER, self.text_group)
+
+    def enable_crown(self) -> None:
+        # Legendary border not separate, no hollow crown
+        self.crown_layer.visible = True
+
+
+class GoldenAgeV2Template (GoldenAgeTemplate):
     """
      * Created by WarpDandy
-    """
-    template_suffix = "Original Expedition"
-
-    @property
-    def is_nyx(self) -> bool:
-        return False
-
-    @property
-    def is_legendary(self) -> bool:
-        return False
-
-    @property
-    def background_layer(self) -> Optional[ArtLayer]:
-        return
-
-    @property
-    def twins_layer(self) -> Optional[ArtLayer]:
-        return
-
-
-class SkyscraperTemplate (temp.NormalTemplate):
-    """
-     * Created by WarpDandy
-    """
-    template_suffix = "Skyscraper"
-
-    @property
-    def is_nyx(self) -> bool:
-        return False
-
-    @property
-    def is_legendary(self) -> bool:
-        return False
-
-    @property
-    def background_layer(self) -> Optional[ArtLayer]:
-        return
-
-    @property
-    def twins_layer(self) -> Optional[ArtLayer]:
-        return
-
-
-class GoldenAgeV2Template (temp.NormalTemplate):
-    """
-     * Created by MrOppsokopolis
+     * Alternate version of the Golden Age template introduced in Streets of New Capenna.
+     * Has more color on pinlines and brushed highlights on textures.
     """
     template_suffix = "Golden Age V2"
 
+
+class GoldenAgeFullArtTemplate (GoldenAgeTemplate):
+    """
+     * Created by WarpDandy
+     * Fullart version of the Golden Age template introduced in Streets of New Capenna.
+    """
+    template_suffix = "Golden Age Fullart"
+
+    """
+    TOGGLE
+    """
+
+    @property
+    def is_fullart(self) -> bool:
+        return True
+
+    """
+    LAYERS
+    """
+
+    @cached_property
+    def text_layer_rules(self) -> Optional[ArtLayer]:
+        if not self.is_creature:
+            self.text_layer_pt.visible = False
+        # No separate text layer for creatures
+        return psd.getLayer(LAYERS.RULES_TEXT_NONCREATURE, self.text_group)
+
+
+class ExpeditionClassicTemplate (NormalTemplate):
+    """
+     * Created by WarpDandy
+     * Original Expedition template introduced in the Battle for Zendikar block.
+    """
+    template_suffix = "BFZ Expedition"
+
+    """
+    TOGGLE
+    """
+
     @property
     def is_nyx(self) -> bool:
         return False
 
     @property
-    def is_companion(self) -> bool:
+    def is_legendary(self) -> bool:
         return False
+
+    """
+    LAYERS
+    """
 
     @property
     def background_layer(self) -> Optional[ArtLayer]:
@@ -405,12 +370,49 @@ class GoldenAgeV2Template (temp.NormalTemplate):
         return
 
 
-class ArtDecoTemplate (temp.NormalTemplate):
+class SkyscraperTemplate (NormalTemplate):
     """
      * Created by WarpDandy
+     * Skyscraper template introduced in Streets of New Capenna.
+    """
+    template_suffix = "Skyscraper"
+
+    """
+    TOGGLE
+    """
+
+    @property
+    def is_land(self) -> bool:
+        return False
+
+    @property
+    def is_legendary(self) -> bool:
+        return False
+
+    """
+    LAYERS
+    """
+
+    @property
+    def background_layer(self) -> Optional[ArtLayer]:
+        return
+
+    @property
+    def twins_layer(self) -> Optional[ArtLayer]:
+        return
+
+
+class ArtDecoTemplate (NormalTemplate):
+    """
+     * Created by WarpDandy
+     * Art Deco template introduced in Streets of New Capenna.
     """
     template_suffix = "Art Deco"
 
+    """
+    TOGGLE
+    """
+
     @property
     def is_companion(self) -> bool:
         return False
@@ -419,28 +421,9 @@ class ArtDecoTemplate (temp.NormalTemplate):
     def is_nyx(self) -> bool:
         return False
 
-    @property
-    def background_layer(self) -> Optional[ArtLayer]:
-        return
-
-    @property
-    def twins_layer(self) -> Optional[ArtLayer]:
-        return
-
-
-class EtchedTemplate (temp.NormalTemplate):
     """
-     * Created by WarpDandy
+    LAYERS
     """
-    template_suffix = "Etched"
-
-    @property
-    def is_legendary(self) -> bool:
-        return False
-
-    @property
-    def is_nyx(self) -> bool:
-        return False
 
     @property
     def background_layer(self) -> Optional[ArtLayer]:
@@ -451,19 +434,23 @@ class EtchedTemplate (temp.NormalTemplate):
         return
 
 
-class DestinyTemplate (temp.NormalTemplate):
+class DestinyTemplate (NormalTemplate):
     """
-     * Created by Meeple, ported to Proxyshop by WarpDandy
+     * Created by Meeple, ported to Proxyshop by WarpDandy.
     """
     template_suffix = "Destiny"
 
-    @property
-    def is_nyx(self) -> bool:
-        return False
+    """
+    TOGGLE
+    """
 
     @property
-    def is_companion(self) -> bool:
+    def is_land(self) -> bool:
         return False
+
+    """
+    LAYERS
+    """
 
     @property
     def background_layer(self) -> Optional[ArtLayer]:
@@ -473,13 +460,36 @@ class DestinyTemplate (temp.NormalTemplate):
     def twins_layer(self) -> Optional[ArtLayer]:
         return
 
+    @cached_property
+    def pt_layer(self) -> Optional[ArtLayer]:
+        # Same for all colors
+        return psd.getLayer(LAYERS.PT_BOX)
+
+    @cached_property
+    def crown_layer(self) -> Optional[ArtLayer]:
+        # Same for all colors
+        return psd.getLayer(LAYERS.LEGENDARY_CROWN)
+
+    """
+    METHODS
+    """
+
+    def enable_crown(self) -> None:
+        # No border swap, no hollow crown
+        self.crown_layer.visible = True
+
         
-class PinlinesExtNeonTemplate (temp.NormalTemplate):
+class NeonPinlinesExtendedTemplate (ExtendedTemplate):
     """
      * Created by WarpDandy
+     * Extended template with neon pinlines.
     """
     template_suffix = "Neon Extended"
 
+    """
+    TOGGLE
+    """
+
     @property
     def is_nyx(self) -> bool:
         return False
@@ -488,6 +498,10 @@ class PinlinesExtNeonTemplate (temp.NormalTemplate):
     def is_companion(self) -> bool:
         return False
 
+    """
+    LAYERS
+    """
+
     @property
     def background_layer(self) -> Optional[ArtLayer]:
         return
@@ -496,47 +510,60 @@ class PinlinesExtNeonTemplate (temp.NormalTemplate):
     def twins_layer(self) -> Optional[ArtLayer]:
         return
 
-    @property
-    def color_indicator_layer(self) -> Optional[ArtLayer]:
-        return
+    @cached_property
+    def pinlines_layer(self) -> Optional[ArtLayer]:
+        # No separate land layers
+        return psd.getLayer(self.layout.pinlines, LAYERS.PINLINES_TEXTBOX)
 
-    def load_artwork(self):
-        # Content aware fill
-        super().load_artwork()
-        psd.content_fill_empty_area(self.art_layer)
+    """
+    METHODS
+    """
+
+    def enable_crown(self) -> None:
+        # No separate border, no hollow, enable pinlines mask
+        self.crown_layer.visible = True
+        psd.enable_mask(self.pinlines_layer.parent)
 
 
-class MysticalArchiveTemplate (temp.NormalTemplate):
+class MysticalArchiveTemplate (BorderlessTemplate):
     """
      * Created by WarpDandy
+     * Mystical Archive (English) template introduced in Strixhaven: School of Mages.
     """
     template_suffix = "Mystical Archive"
 
+    """
+    TOGGLE
+    """
+
     @property
     def is_legendary(self) -> bool:
+        # Crowns not supported
         return False
 
     @property
-    def is_nyx(self) -> bool:
+    def is_land(self) -> bool:
+        # No separate pinlines
         return False
 
-    @property
-    def background_layer(self) -> Optional[ArtLayer]:
-        return
+    """
+    LAYERS
+    """
 
     @property
     def twins_layer(self) -> Optional[ArtLayer]:
         return
 
-    def load_artwork(self):
-        # Content aware fill
-        super().load_artwork()
-        psd.content_fill_empty_area(self.art_layer)
+    @property
+    def pt_layer(self) -> Optional[ArtLayer]:
+        # Not separated by color
+        return psd.getLayer(LAYERS.PT_BOX)
 
 
-class FangExtendedTemplate (temp.NormalTemplate):
+class FangExtendedTemplate (ExtendedTemplate):
     """
      * Created by WarpDandy
+     * Extended version of the Crimson Fang template introduced in Innistrad: Crimson Vow.
     """
     template_suffix = "Fang Extended"
 
@@ -544,37 +571,9 @@ class FangExtendedTemplate (temp.NormalTemplate):
     def is_nyx(self) -> bool:
         return False
 
-    @property
-    def is_companion(self) -> bool:
-        return False
-
-    def load_artwork(self):
-        # Content aware fill
-        super().load_artwork()
-        psd.content_fill_empty_area(self.art_layer)
-
-
-class GoldenAgeFullArtTemplate (temp.NormalTemplate):
-    """
-     * Created by WarpDandy
-    """
-    template_suffix = "Golden Age Full Art"
-
-    @property
-    def is_nyx(self) -> bool:
-        return False
-
-    @property
-    def is_companion(self) -> bool:
-        return False
-
-    @property
-    def background_layer(self) -> Optional[ArtLayer]:
-        return
-
-    @property
-    def twins_layer(self) -> Optional[ArtLayer]:
-        return
+    def enable_crown(self) -> None:
+        # No border swap
+        self.crown_layer.visible = True
 
 
 """
@@ -582,15 +581,16 @@ Planeswalker templates
 """
 
 
-class ClassicPWTemplate (temp.PlaneswalkerTemplate):
+class ClassicPWTemplate (PlaneswalkerTemplate):
     """
-     * Planeswalker template - 3 or 4 loyalty abilities.
+     * Created by WarpDandy.
+     * Classic version of the Planeswalker template.
     """
     template_suffix = "Classic PW"
 
-    def __init__(self, layout):
-        cfg.real_collector = False
-        super().__init__(layout)
+    """
+    LAYERS
+    """
 
     @property
     def background_layer(self) -> Optional[ArtLayer]:
@@ -613,6 +613,40 @@ class ClassicPWTemplate (temp.PlaneswalkerTemplate):
             return psd.getLayer("Divider Block", self.loyalty_group)
         return
 
+    """
+    METHODS
+    """
+
+    def collector_info_authentic(self) -> None:
+        """
+        Called to generate realistic collector info.
+        """
+        # Hide basic layers
+        psd.getLayer(LAYERS.ARTIST, self.legal_group).visible = False
+        psd.getLayer(LAYERS.SET, self.legal_group).visible = False
+
+        # Get the collector layers
+        collector_group = psd.getLayerSet(LAYERS.COLLECTOR, LAYERS.LEGAL)
+        artist = psd.getLayer(LAYERS.TOP_LINE, collector_group)
+        info = psd.getLayer(LAYERS.BOTTOM_LINE, collector_group)
+        collector_group.visible = True
+
+        # Correct color for non-black border
+        if self.border_color != 'black':
+            artist.textItem.color = psd.rgb_black()
+            info.textItem.color = psd.rgb_black()
+
+        # Establish the collector data
+        if '/' in self.layout.collector_data:
+            number = self.layout.collector_data[:-2]
+        else:
+            number = self.layout.collector_data[2:]
+
+        # Apply the collector info
+        psd.replace_text(info, "NUM", number)
+        psd.replace_text(info, "SET", self.layout.set)
+        psd.replace_text(artist, "Artist", self.layout.artist)
+
     def basic_text_layers(self):
 
         # Iterate through abilities to add text layers
@@ -623,25 +657,25 @@ class ClassicPWTemplate (temp.PlaneswalkerTemplate):
             if 5 > colon_index > 0:
 
                 # Determine which loyalty group to enable, and set the loyalty symbol's text
-                loyalty_graphic = psd.getLayer(con.layers.COST, self.loyalty_group).duplicate()
+                loyalty_graphic = psd.getLayer(LAYERS.COST, self.loyalty_group).duplicate()
                 loyalty_graphic.textItem.contents = ability[:int(colon_index)]
                 if colon_index > 2:
                     loyalty_graphic.textItem.size = (
                             psd.get_text_scale_factor(loyalty_graphic) * loyalty_graphic.textItem.size
                     ) - 1
                     loyalty_graphic.translate(0, -4)
-                ability_layer = psd.getLayer(con.layers.ABILITY_TEXT, self.loyalty_group).duplicate()
+                ability_layer = psd.getLayer(LAYERS.ABILITY_TEXT, self.loyalty_group).duplicate()
 
                 # Add text layer, shields, and colons to list
                 self.ability_layers.append(ability_layer)
                 self.shields.append(loyalty_graphic)
-                self.colons.append(psd.getLayer(con.layers.COLON, self.loyalty_group).duplicate())
+                self.colons.append(psd.getLayer(LAYERS.COLON, self.loyalty_group).duplicate())
                 ability = ability[colon_index + 2:]
 
             else:
 
                 # Hide default ability, switch to static
-                ability_layer = psd.getLayer(con.layers.STATIC_TEXT, self.loyalty_group).duplicate()
+                ability_layer = psd.getLayer(LAYERS.STATIC_TEXT, self.loyalty_group).duplicate()
                 self.ability_layers.append(ability_layer)
                 self.shields.append(None)
                 self.colons.append(None)
@@ -660,27 +694,13 @@ class ClassicPWTemplate (temp.PlaneswalkerTemplate):
             )
 
         # Starting loyalty
-        psd.getLayer(
-            con.layers.TEXT, [self.loyalty_group, con.layers.STARTING_LOYALTY]
-        ).textItem.contents = self.layout.loyalty
+        if self.layout.loyalty:
+            self.loyalty_text.textItem.contents = self.layout.loyalty
+        else:
+            self.loyalty_text.parent.visible = False
 
         # Add text layers.
-        self.text.extend([
-            text_classes.FormattedTextField(
-                layer=self.text_layer_mana,
-                contents=self.layout.mana_cost
-            ),
-            text_classes.ScaledTextField(
-                layer=self.text_layer_name,
-                contents=self.layout.name,
-                reference=self.text_layer_mana
-            ),
-            text_classes.ScaledTextField(
-                layer=self.text_layer_type,
-                contents=self.layout.type_line,
-                reference=self.expansion_symbol_layer
-            )
-        ])
+        super(PlaneswalkerTemplate, self).basic_text_layers()
 
     def pw_ability_mask(self):
         # Position a divider between each ability layer
@@ -692,8 +712,9 @@ class ClassicPWTemplate (temp.PlaneswalkerTemplate):
                     divider.translate(0, -6)
 
 
-class ArtDecoPWTemplate (temp.PlaneswalkerTemplate):
+class ArtDecoPWTemplate (PlaneswalkerTemplate):
     """
-     * Planeswalker template - 3 or 4 loyalty abilities.
+     * Created by WarpDandy.
+     * Art Deco version of the Planeswalker template.
     """
     template_suffix = "Art Deco"

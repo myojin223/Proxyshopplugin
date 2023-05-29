@@ -20,6 +20,11 @@
             "file": "Mirror.psd",
             "id": "1lVqMF3weDuZ_QIHtyjT5One21wliZXNG"
         },
+        "Nickname": {
+            "class": "NicknameBaseTemplate",
+            "file": "NicknameBase.psd",
+            "id": "1XC_wCiWOzjLmUvV1baFzxm5OVwZ_Y6Ca"
+        },
         "Nickname Small": {
             "class": "NicknameSmallTemplate",
             "file": "NicknameSmall.psd",
@@ -35,18 +40,13 @@
             "file": "NicknameLarge.psd",
             "id": "1pyFniUQkAveV_4p-2FK9rB7NOZJJGDJT"
         },
-        "Nickname": {
-            "class": "NicknameBaseTemplate",
-            "file": "NicknameBase.psd",
-            "id": "1XC_wCiWOzjLmUvV1baFzxm5OVwZ_Y6Ca"
-        },
         "Golden Age": {
             "class": "GoldenAgeTemplate",
             "file": "GoldenAge.psd",
             "id": "1iwUKo3jYY0v7sYjNjDJ9AZQbsLau_rRy"
         },
-        "Original Expedition": {
-            "class": "zneExpeditionTemplate",
+        "Expedition Classic": {
+            "class": "ExpeditionClassicTemplate",
             "file": "zneExpedition.psd",
             "id": "1JyjFRYgvEFnJ7_gVTX9YUsE9BYrgPeXb"
         },
@@ -65,18 +65,13 @@
             "file": "ArtDeco.psd",
             "id": "1MSnqGrvbeevUSpaI9-Xy1l3fuh_Rf4oA"
         },
-        "Etched": {
-            "class": "EtchedTemplate",
-            "file": "Etched.psd",
-            "id": "1pjJONx6KNV9GAh9PSXbjcmi1oCrKKU94"
-        },
         "Destiny": {
             "class": "DestinyTemplate",
             "file": "Destiny.psd",
             "id": "1PNFrX2g74_b1LbdbOxZZd3IIo9SE0NAm"
         },
         "Neon Extended": {
-            "class": "PinlinesExtNeonTemplate",
+            "class": "NeonPinlinesExtendedTemplate",
             "file": "PinlinesExtNeon.psd",
             "id": "1iFWhyp7x1s35Wh3ykBv8MLrZ-fqFj427"
         },
@@ -102,12 +97,12 @@
         }
     },
     "planeswalker": {
-        "Classic PW": {
+        "Classic": {
             "class": "ClassicPWTemplate",
             "file": "ClassicPW.psd",
             "id": "1w2qpg-YR8Rd_qwswQ0WILSGaLlvCTdhe"
         },
-        "Art Deco PW": {
+        "Art Deco": {
             "class": "ArtDecoPWTemplate",
             "file": "ArtDecoPW.psd",
             "id": "1UerUkwOZJBitvHgZFG9CgoUUnQA4H28-"
