@@ -3,7 +3,7 @@ WARPDANDY TEMPLATES
 """
 # Standard Library Imports
 from functools import cached_property
-from typing import Optional
+from typing import Optional, Union
 
 # Third Party Imports
 from photoshop.api._layerSet import LayerSet
@@ -718,3 +718,17 @@ class ArtDecoPWTemplate (PlaneswalkerTemplate):
      * Art Deco version of the Planeswalker template.
     """
     template_suffix = "Art Deco"
+
+    @cached_property
+    def twins_layer(self) -> Optional[ArtLayer]:
+        layer = psd.getLayer(self.pinlines, LAYERS.TWINS)
+        layer.move(self.pinlines_layer, ps.ElementPlacement.PlaceBefore)
+        return layer
+
+    @cached_property
+    def background_layer(self) -> Optional[ArtLayer]:
+        return
+
+    @cached_property
+    def border_group(self) -> Union[None, ArtLayer, LayerSet]:
+        return psd.getLayer(LAYERS.BORDER)
