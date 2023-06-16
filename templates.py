@@ -350,12 +350,20 @@ class ExpeditionClassicTemplate (NormalTemplate):
     """
 
     @property
+    def is_land(self) -> bool:
+        return False
+
+    @property
     def is_nyx(self) -> bool:
         return False
 
     @property
     def is_legendary(self) -> bool:
         return False
+
+    @property
+    def is_fullart(self) -> bool:
+        return True
 
     """
     LAYERS
