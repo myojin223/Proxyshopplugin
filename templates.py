@@ -17,11 +17,10 @@ from src.templates import (
     BorderlessTemplate,
     PlaneswalkerTemplate
 )
-import src.format_text as ft
 import src.text_layers as text_classes
 import src.helpers as psd
 from src.settings import cfg
-from src.enums.photoshop import Alignment
+from src.enums.photoshop import Dimensions
 from src.enums.layers import LAYERS
 
 
@@ -125,8 +124,8 @@ class MirroredTemplate (NormalTemplate):
     """
 
     @cached_property
-    def expansion_symbol_alignments(self) -> list[Alignment]:
-        return [Alignment.CenterVertical, Alignment.Left]
+    def expansion_symbol_alignments(self) -> list[Dimensions]:
+        return [Dimensions.Left, Dimensions.CenterY]
 
     """
     METHODS
@@ -291,11 +290,6 @@ class GoldenAgeTemplate (NormalTemplate):
     def pt_layer(self) -> Optional[ArtLayer]:
         # Not separated by color
         return psd.getLayerSet(LAYERS.PT_BOX)
-
-    @cached_property
-    def divider_layer(self) -> Optional[ArtLayer]:
-        # Divider is a group
-        return psd.getLayerSet(LAYERS.DIVIDER, self.text_group)
 
     def enable_crown(self) -> None:
         # Legendary border not separate, no hollow crown
@@ -609,10 +603,6 @@ class ClassicPWTemplate (PlaneswalkerTemplate):
         return
 
     @cached_property
-    def group(self) -> LayerSet:
-        return psd.getLayerSet("Planeswalker")
-
-    @cached_property
     def ability_divider(self) -> Optional[ArtLayer]:
         div = cfg.get_setting(section="TEXT", key="Ability.Divider", default="Modern", is_bool=False)
         if div == "Modern":
@@ -622,14 +612,31 @@ class ClassicPWTemplate (PlaneswalkerTemplate):
         return
 
     """
+    REFERENCES
+    """
+
+    @property
+    def top_ref(self) -> Optional[ArtLayer]:
+        return
+
+    @property
+    def adj_ref(self) -> Optional[ArtLayer]:
+        return
+
+    """
+    GROUPS
+    """
+
+    @cached_property
+    def group(self) -> LayerSet:
+        return psd.getLayerSet("Planeswalker")
+
+    """
     METHODS
     """
 
     def collector_info_authentic(self) -> None:
-        """
-        Called to generate realistic collector info.
-        """
-        # Hide basic layers
+        # Pulled from NormalClassicTemplate.
         psd.getLayer(LAYERS.ARTIST, self.legal_group).visible = False
         psd.getLayer(LAYERS.SET, self.legal_group).visible = False
 
@@ -655,60 +662,27 @@ class ClassicPWTemplate (PlaneswalkerTemplate):
         psd.replace_text(info, "SET", self.layout.set)
         psd.replace_text(artist, "Artist", self.layout.artist)
 
-    def basic_text_layers(self):
+    def pw_add_ability(self, text: str, index: int):
+        # Update this method to adjust font size for different cost lengths.
+        shield = psd.getLayer(LAYERS.COST, self.loyalty_group).duplicate()
+        shield.textItem.contents = text[:int(index)]
+        if index > 2:
+            shield.textItem.size = (psd.get_text_scale_factor(shield) * shield.textItem.size) - 1
+            shield.translate(0, -4)
+        layer = psd.getLayer(LAYERS.ABILITY_TEXT, self.loyalty_group).duplicate()
 
-        # Iterate through abilities to add text layers
-        for i, ability in enumerate(self.abilities):
+        # Add text layer, shields, and colons to list
+        self.ability_layers.append(layer)
+        self.shields.append(shield)
+        self.colons.append(psd.getLayer(LAYERS.COLON, self.loyalty_group).duplicate())
 
-            # Get the colon index, determine if this is static or activated ability
-            colon_index = ability.find(": ")
-            if 5 > colon_index > 0:
-
-                # Determine which loyalty group to enable, and set the loyalty symbol's text
-                loyalty_graphic = psd.getLayer(LAYERS.COST, self.loyalty_group).duplicate()
-                loyalty_graphic.textItem.contents = ability[:int(colon_index)]
-                if colon_index > 2:
-                    loyalty_graphic.textItem.size = (
-                            psd.get_text_scale_factor(loyalty_graphic) * loyalty_graphic.textItem.size
-                    ) - 1
-                    loyalty_graphic.translate(0, -4)
-                ability_layer = psd.getLayer(LAYERS.ABILITY_TEXT, self.loyalty_group).duplicate()
-
-                # Add text layer, shields, and colons to list
-                self.ability_layers.append(ability_layer)
-                self.shields.append(loyalty_graphic)
-                self.colons.append(psd.getLayer(LAYERS.COLON, self.loyalty_group).duplicate())
-                ability = ability[colon_index + 2:]
-
-            else:
-
-                # Hide default ability, switch to static
-                ability_layer = psd.getLayer(LAYERS.STATIC_TEXT, self.loyalty_group).duplicate()
-                self.ability_layers.append(ability_layer)
-                self.shields.append(None)
-                self.colons.append(None)
-
-                # Is this a double line ability?
-                if "\n" in ability:
-                    self.active_layer = ability_layer
-                    ft.space_after_paragraph(2)
-
-            # Add ability text
-            self.text.append(
-                text_classes.FormattedTextField(
-                    layer=ability_layer,
-                    contents=ability
-                )
+        # Add ability text
+        self.text.append(
+            text_classes.FormattedTextField(
+                layer=layer,
+                contents=text[index + 2:]
             )
-
-        # Starting loyalty
-        if self.layout.loyalty:
-            self.loyalty_text.textItem.contents = self.layout.loyalty
-        else:
-            self.loyalty_text.parent.visible = False
-
-        # Add text layers.
-        super(PlaneswalkerTemplate, self).basic_text_layers()
+        )
 
     def pw_ability_mask(self):
         # Position a divider between each ability layer
