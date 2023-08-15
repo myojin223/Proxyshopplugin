@@ -1,0 +1,10 @@
+[
+  {
+    "type": "bool",
+    "title": "[b]Dark Mode[/b]",
+    "desc": "When enabled, use darker frame layers.\n[b](Default: False)[/b]",
+    "section": "FRAME",
+    "key": "Dark.Mode",
+    "default": 0
+  }
+]
