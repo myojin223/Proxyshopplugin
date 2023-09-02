@@ -568,6 +568,27 @@ class FangExtendedTemplate (ExtendedTemplate):
         self.crown_layer.visible = True
 
 
+class TardisTemplate (NormalEssentialsTemplate):
+    """
+     * Created by WarpDandy
+     * Taris template introduced in WOE.
+    """
+    template_suffix = "Tardis"
+
+    """
+    LAYERS
+    """
+
+    @cached_property
+    def background_layer(self) -> Optional[ArtLayer]:
+        return
+
+    @cached_property
+    def twins_layer(self) -> Optional[ArtLayer]:
+        return
+
+
+
 """
 Planeswalker templates
 """
