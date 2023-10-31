@@ -1,0 +1,9 @@
+[TEXT]
+title = ""
+
+[TEXT."Ability.Divider"]
+title = "Ability Dividers"
+desc = """Choose between modern, classic, or no ability divider."""
+type = "options"
+default = "Modern"
+options = ["Modern", "Classic", "None"]
