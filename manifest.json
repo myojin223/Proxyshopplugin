@@ -69,6 +69,11 @@
             "class": "SkyscraperTemplate",
             "file": "Skyscraper.psd",
             "id": "1f9rTbXoeNNYGUiNMTY64ZxhbrV0kfPSS"
+        },
+		"Tardis": {
+            "class": "TardisTemplate",
+            "file": "Tardis.psd",
+            "id": "19wf8FRCIzy4bYGSsA1PLp73St-r_QFpr"
         }
     },
     "planeswalker": {
