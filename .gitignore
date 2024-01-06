@@ -4,4 +4,5 @@ __pycache__/
 *$py.class
 {\rtf1}
 *.psd
-/configs/*.ini
+/config_ini
+/.idea
