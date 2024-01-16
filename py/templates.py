@@ -8,7 +8,7 @@ from typing import Optional
 # Third Party Imports
 from photoshop.api._layerSet import LayerSet
 from photoshop.api._artlayer import ArtLayer
-import photoshop.api as ps
+from photoshop.api import AnchorPosition, ElementPlacement
 
 # Local Imports
 from src import CFG
@@ -18,7 +18,8 @@ from src.templates import (
     ExtendedMod,
     BorderlessMod,
     NormalTemplate,
-    PlaneswalkerTemplate)
+    PlaneswalkerTemplate,
+    VectorTemplate)
 import src.text_layers as text_classes
 import src.helpers as psd
 from src.enums.adobe import Dimensions
@@ -115,7 +116,7 @@ class MirroredTemplate (M15Template):
     def load_artwork(self):
         """Flip artwork."""
         super().load_artwork()
-        self.active_layer.resize(-100, 100, ps.AnchorPosition.MiddleCenter)
+        self.active_layer.resize(-100, 100, AnchorPosition.MiddleCenter)
 
     """
     * Text Layer Methods
@@ -276,6 +277,15 @@ class ArtDecoTemplate (NormalTemplate):
     background_layer = None
     twins_layer = None
 
+    """
+    * Frame Layers
+    """
+
+    @cached_property
+    def pinlines_layer(self) -> ArtLayer:
+        """ArtLayer: No delineation for Land cards."""
+        return psd.getLayer(self.layout.pinlines, LAYERS.PINLINES_TEXTBOX)
+
 
 class DestinyTemplate (NormalTemplate):
     """
@@ -401,16 +411,94 @@ class FangExtendedTemplate (ExtendedMod, NormalTemplate):
         self.crown_layer.visible = True
 
 
-class TardisTemplate (NormalTemplate):
+class TardisTemplate (VectorTemplate):
     """
      * Created by WarpDandy
      * Tardis template introduced in WOE.
     """
     template_suffix = "Tardis"
 
-    # Static Properties
-    background_layer = None
-    twins_layer = None
+    """
+    * Frame Layers
+    """
+
+    @cached_property
+    def pt_layer(self) -> ArtLayer:
+        """ArtLayer: Not separated by colors."""
+        return psd.getLayer(LAYERS.PT_BOX, self.docref)
+
+    """
+    * Expansion Symbol
+    """
+
+    @property
+    def expansion_symbol_alignments(self) -> list[Dimensions]:
+        """Alignments used for positioning the expansion symbol"""
+        return [Dimensions.CenterX, Dimensions.CenterY]
+
+    def load_expansion_symbol(self) -> None:
+        """Imports and positions the expansion symbol SVG image."""
+
+        # Check for expansion symbol disabled
+        if not CFG.symbol_enabled or not self.expansion_reference:
+            return
+        if not self.layout.symbol_svg:
+            return self.log("Expansion symbol disabled, SVG file not found.")
+
+        # Try to import the expansion symbol
+        try:
+
+            # Import and place the symbol
+            svg = psd.import_svg(
+                path=str(self.layout.symbol_svg),
+                ref=self.expansion_reference,
+                placement=ElementPlacement.PlaceBefore,
+                docref=self.docref)
+
+            # Frame the symbol
+            psd.frame_layer(
+                layer=svg,
+                ref=self.expansion_reference,
+                smallest=True,
+                alignments=self.expansion_symbol_alignments)
+
+            # Rename and reset property
+            svg.name = 'Expansion Symbol'
+            self.expansion_symbol_layer = svg
+
+        except Exception as e:
+            return self.log('Expansion symbol disabled due to an error.', e)
+
+    """
+    * Frame Layer Methods
+    """
+
+    def enable_frame_layers(self) -> None:
+        """Enable layers which make-up the frame of the card."""
+
+        # PT Box
+        if self.is_creature:
+            self.pt_layer.visible = True
+
+        # Pinlines
+        self.generate_layer(
+            group=self.pinlines_group,
+            colors=self.pinlines,
+            masks=self.mask_layers)
+
+        # Color Indicator -> Blended solid color layers
+        if self.is_type_shifted:
+            self.generate_layer(
+                group=self.indicator_group,
+                colors=self.indicator_colors,
+                masks=self.indicator_masks)
+
+        # Legendary crown
+        if self.is_legendary:
+            self.generate_layer(
+                group=self.crown_group,
+                colors=self.pinlines,
+                masks=self.mask_layers)
 
 
 """
@@ -542,7 +630,7 @@ class ArtDecoPWTemplate (PlaneswalkerTemplate):
     @cached_property
     def twins_layer(self) -> Optional[ArtLayer]:
         layer = psd.getLayer(self.pinlines, LAYERS.TWINS)
-        layer.move(self.pinlines_layer, ps.ElementPlacement.PlaceBefore)
+        layer.move(self.pinlines_layer, ElementPlacement.PlaceBefore)
         return layer
 
     """

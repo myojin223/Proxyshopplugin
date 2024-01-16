@@ -16,77 +16,77 @@ PLUGIN:
 
 ArtDeco.psd:
   id: '1MSnqGrvbeevUSpaI9-Xy1l3fuh_Rf4oA'
-  desc: """Based on the 'Art Deco' showcase from Streets of New Capenna."""
+  desc: "Based on the 'Art Deco' showcase from Streets of New Capenna."
   templates: { Art Deco: ArtDecoTemplate }
 
 NoBorderSmall.psd:
   id: '1AB_9J4ERabjOA8Ri-Ro7lxswwmTHSv6y'
-  desc: """A Borderless frame based on the Godzilla themed box toppers from Ikoria."""
+  desc: "A Borderless frame based on the Godzilla themed box toppers from Ikoria."
   templates: { Borderless Ikoria: BorderlessIkoria }
 
 FangExtended.psd:
   id: '1_HArLOeOIWIl5dNrujkHTwpqVh-hcS3O'
-  desc: """An Extended Art variant of the 'Crimson Fang' showcase introduced in Crimson Vow."""
+  desc: "An Extended Art variant of the 'Crimson Fang' showcase introduced in Crimson Vow."
   templates: { Crimson Fang Extended: FangExtendedTemplate }
 
 Destiny.psd:
   id: '1PNFrX2g74_b1LbdbOxZZd3IIo9SE0NAm'
-  desc: """A template created by Meeple and integrated with Proxyshop by WarpDandy."""
+  desc: "A template created by Meeple and integrated with Proxyshop by WarpDandy."
   templates: { Destiny: DestinyTemplate }
 
 zneExpedition.psd:
   id: '1JyjFRYgvEFnJ7_gVTX9YUsE9BYrgPeXb'
-  desc: """Based on the original 'Expedition' showcase from Battle for Zendikar."""
+  desc: "Based on the original 'Expedition' showcase from Battle for Zendikar."
   templates: { Expedition Classic: ExpeditionClassicTemplate }
 
 GoldenAge.psd:
   id: '1iwUKo3jYY0v7sYjNjDJ9AZQbsLau_rRy'
-  desc: """Based on the 'Golden Age' showcase introduced in Streets of New Capenna."""
+  desc: "Based on the 'Golden Age' showcase introduced in Streets of New Capenna."
   templates: { Golden Age: GoldenAgeTemplate }
 
 GoldenAgeFullArt.psd:
   id: '1oMVrIkgn2MpFse9fCrts_F-ZOyq0m-Wz'
-  desc: """Fullart variant of the Golden Age template."""
+  desc: "Fullart variant of the Golden Age template."
   templates: { Golden Age Fullart: GoldenAgeFullArtTemplate }
 
 Mirror.psd:
   id: '1lVqMF3weDuZ_QIHtyjT5One21wliZXNG'
-  desc: """Based on the left-handed April Fools Secret Lair drop where the frame is flipped."""
+  desc: "Based on the left-handed April Fools Secret Lair drop where the frame is flipped."
   templates: { Mirrored: MirroredTemplate }
 
 MysticalArchive.psd:
   id: '1KpDKnP21GA4rP5_iGoWhcTJC2cN7cVh6'
-  desc: """	Based on the English-language 'Mystical Archive' showcase introduced in Strixhaven."""
+  desc: "	Based on the English-language 'Mystical Archive' showcase introduced in Strixhaven."
   templates: { Mystical Archive: MysticalArchiveTemplate }
 
 PinlinesExtNeon.psd:
   id: '1iFWhyp7x1s35Wh3ykBv8MLrZ-fqFj427'
-  desc: """Extended Art variant based on the 'Neon' showcase introduced in Kamigawa Neon Dynasty."""
+  desc: "Extended Art variant based on the 'Neon' showcase introduced in Kamigawa Neon Dynasty."
   templates: { Neon Extended: NeonPinlinesExtendedTemplate }
 
 Ninja.psd:
   id: '1GxLkUQm2f5Acd85jIS10A7J4pqYSSPOK'
-  desc: """Based on the 'Ninja' showcase introduced in Kamigawa Neon Dynasty."""
+  desc: "Based on the 'Ninja' showcase introduced in Kamigawa Neon Dynasty."
   templates: { Ninja: NinjaTemplate }
 
 NinjaGlitch.psd:
   id: '1xEXBYkwa2JGRn9Zwm18T7smuhMi3DFXV'
-  desc: """'Glitch' variant of the Ninja template."""
+  desc: "'Glitch' variant of the Ninja template."
   templates: { Ninja Glitch: NinjaGlitchTemplate }
 
 Samurai.psd:
   id: '1L63KAFo4-R3Pj8WfBiQ6Dho5J-aJtrp2'
-  desc: """Based on the 'Samurai' showcase introduced in Kamigawa Neon Dynasty."""
+  desc: "Based on the 'Samurai' showcase introduced in Kamigawa Neon Dynasty."
   templates: { Samurai: SamuraiTemplate }
 
 Skyscraper.psd:
   id: '1f9rTbXoeNNYGUiNMTY64ZxhbrV0kfPSS'
-  desc: """Based on the 'Skyscraper' showcase introduced in Streets of New Capenna."""
+  desc: "Based on the 'Skyscraper' showcase introduced in Streets of New Capenna."
   templates: { Skyscraper: SkyscraperTemplate }
 
 Tardis.psd:
   id: '19wf8FRCIzy4bYGSsA1PLp73St-r_QFpr'
-  desc: """Based on the 'Tardis' showcase introduced in the Doctor Who Universes Beyond product."""
+  desc: "Based on the 'Tardis' showcase introduced in the Doctor Who Universes Beyond product."
   templates: { Tardis: TardisTemplate }
 
 ###
@@ -95,14 +95,14 @@ Tardis.psd:
 
 ArtDecoPW.psd:
   id: '1UerUkwOZJBitvHgZFG9CgoUUnQA4H28-'
-  desc: """Based on the 'Art Deco' showcase from Streets of New Capenna (for Planeswalkers)."""
+  desc: "Based on the 'Art Deco' showcase from Streets of New Capenna (for Planeswalkers)."
   templates:
     Art Deco:
       ArtDecoPWTemplate: [planeswalker]
 
 ClassicPW.psd:
   id: '1w2qpg-YR8Rd_qwswQ0WILSGaLlvCTdhe'
-  desc: """A Classic frame for Planeswalker cards."""
+  desc: "A Classic frame for Planeswalker cards."
   templates:
     Classic:
       ClassicPWTemplate: [planeswalker]
