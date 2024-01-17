@@ -1,0 +1,8 @@
+[FRAME]
+title = "Frame Options"
+
+[FRAME."Dark.Mode"]
+title = "Dark Mode"
+desc = """When enabled, use darker frame layers."""
+type = "bool"
+default = 0
