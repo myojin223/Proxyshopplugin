@@ -2,7 +2,7 @@
 A plugin containing all of my Proxyshop templates.
 
 ## Usage Guide
-1. Extract this repository the `/Proxyshop/plugins` directory. Ensure this folder is named **WarpDandy**.
+1. Extract this repository to the `/Proxyshop/plugins` directory.  The folder should be named **WarpDandy**.
 2. Download my templates using the **Update** button or [download them manually here](https://bit.ly/WDTemplates).
 3. You're good to go!
 
